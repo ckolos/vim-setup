@@ -9,7 +9,6 @@ set copyindent
 "set cursorcolumn
 set cursorline
 set expandtab
-set foldmethod=marker
 set ignorecase
 set incsearch
 set joinspaces
