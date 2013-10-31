@@ -1,7 +1,7 @@
 vim-setup
 =========
 
-My vim setup (ymmv)  
+My vim setup (ymmv)
 Includes plugins from the following repos:  
 - https://github.com/tpope/vim-git  
 - https://github.com/tpope/vim-fugitive  
@@ -18,9 +18,9 @@ Includes plugins from the following repos:
 
 Instructions for use:
 
-git clone https://github.com/ckolos/vim-setup
-vim-setup/vimsetup.sh
+git clone https://github.com/ckolos/vim-setup  
+vim-setup/vimsetup.sh  
 
 don't remove the vim-setup dir
 
-To update the bundle/ packages, run ~/.vim/bundle/update.sh 
+To update the bundle/ packages, run ~/.vim/bundle/update.sh
