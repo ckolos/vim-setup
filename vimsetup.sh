@@ -14,7 +14,7 @@ cd "${VIMDIR}/bundle"        || { echo "Cant access $VIMDIR"; exit; }
 
 
 for bundle in tpope/{vim-pathogen,vim-git,vim-fugitive,vim-markdown} \
-    godlygeek/{tabular,csapprox} \
+    godlygeek/tabular \
     altercation/vim-colors-solarized \
     elzr/vim-json \
     john2x/flatui.vim \
@@ -30,11 +30,10 @@ done
 ln -sf "$BUNDLEDIR"/vim-pathogen/autoload/pathogen.vim "$AUTODIR"/
 
 cd $HOME
-git clone https://github.com/ckolos/vim-setup/myvimrc .vimrc
+cp ./myvimrc $HOME/.vimrc
 
 # https://github.com/tpope/{vim-pathogen,vim-git,vim-fugitive,vim-markdown} 
 # https://github.com/godlygeek/tabular
-# https://github.com/godlygeek/csapprox
 # https://github.com/altercation/vim-colors-solarized
 # https://github.com/elzr/vim-json
 # https://github.com/john2x/flatui.vim
