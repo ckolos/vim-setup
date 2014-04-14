@@ -1,4 +1,6 @@
 call pathogen#infect()
+set t_Co=256
+set t_ut=
 syntax enable
 filetype on
 filetype indent on

@@ -4,6 +4,8 @@ VIMRC="$HOME/.vimrc"
 AUTODIR="$VIMDIR/autoload"
 BUNDLEDIR="$VIMDIR/bundle"
 
+cd $HOME
+
 test -f  "$VIMRC" && /bin/mv "${VIMRC}" "${VIMRC}.bak"
 test -f "$VIMDIR" && /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
 
