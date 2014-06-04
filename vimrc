@@ -39,9 +39,9 @@ set wildmode=list:longest,full
 set wrapscan
 
 iab YDATE <TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
-iab CK  <TAB>Chris Kolosiwsky
-iab LM <TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
-iab MB <TAB>Modified By:<TAB>Chris Kolosiwsky<CR>
+iab CCK  <TAB>Chris Kolosiwsky
+iab CLM <TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
+iab CMB <TAB>Modified By:<TAB>Chris Kolosiwsky<CR>
 iab HEA #<TAB>File: <C-R>=bufname("%")<CR><CR>#<CR>#<TAB>Chris Kolosiwsky<CR>#<TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>#<TAB>License: GNU Public License (http://www.gnu.org/copyleft/gpl.html)
 "
 " I have no idea what these do
