@@ -65,10 +65,10 @@ endif
 
 if has('gui_running')
     set background=light
-    colorscheme solarized
+    colorscheme borland
 else
     set background=dark
-    colorscheme solarized
+    colorscheme Tomorrow-Night
 endif
 
 au BufRead /tmp/mutt* :silent set filetype=mail
