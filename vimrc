@@ -1,10 +1,10 @@
+set nocompatible
 call pathogen#infect()
-set t_Co=256
-set t_ut=
-syntax enable
 filetype on
 filetype indent on
 filetype plugin on
+set t_Co=256
+set t_ut=
 set autoindent
 set backspace=2
 set copyindent
@@ -15,10 +15,9 @@ set ignorecase
 set incsearch
 set joinspaces
 set laststatus=2
-set modeline
-set modelines=3
+"set modeline
+"set modelines=3
 set nobackup
-set nocompatible
 set noswapfile
 set nowb
 set number
@@ -37,12 +36,13 @@ set visualbell
 set wildchar=<TAB>
 set wildmode=list:longest,full
 set wrapscan
+syntax enable
 
 iab YDATE <TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab CCK  <TAB>Chris Kolosiwsky
 iab CLM <TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab CMB <TAB>Modified By:<TAB>Chris Kolosiwsky<CR>
-iab HEA #<TAB>File: <C-R>=bufname("%")<CR><CR>#<CR>#<TAB>Chris Kolosiwsky<CR>#<TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>#<TAB>License: GNU Public License (http://www.gnu.org/copyleft/gpl.html)
+iab CHDR #<TAB>File: <C-R>=bufname("%")<CR><CR>#<CR>#<TAB>Chris Kolosiwsky<CR>#<TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>#<TAB>License: GNU Public License (http://www.gnu.org/copyleft/gpl.html)
 "
 " I have no idea what these do
 nmap n nmzz.`z
@@ -87,6 +87,10 @@ noremap <F6> <ESC>:set number<CR>
 
 "JSON Filetype setting
 let g:vim_json_syntax_conceal = 0
+
+"Make puppet-lint behave in syntastic
+let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
+"
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
