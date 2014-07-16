@@ -35,7 +35,6 @@ set splitbelow
 set splitright
 set tabstop=2
 set title
-set textwidth=80
 set visualbell
 set wildchar=<TAB>
 set wildmode=list:longest,full
