@@ -7,6 +7,7 @@ set t_Co=256
 set t_ut=
 set autoindent
 set backspace=2
+set colorcolumn=+1
 set copyindent
 "set cursorcolumn
 set cursorline
@@ -15,6 +16,7 @@ set ignorecase
 set incsearch
 set joinspaces
 set laststatus=2
+set list listchars=tab:»·,trail:·
 "set modeline
 "set modelines=3
 set nobackup
@@ -23,15 +25,17 @@ set nowb
 set number
 set report=0
 set ruler
-set shiftwidth=4
+set shiftround
 set showcmd
 set showmatch
 set showmode
 set smartindent
-set softtabstop=4
+set softtabstop=2
 set splitbelow
-set tabstop=4
+set splitright
+set tabstop=2
 set title
+set textwidth=80
 set visualbell
 set wildchar=<TAB>
 set wildmode=list:longest,full
@@ -91,8 +95,9 @@ let g:vim_json_syntax_conceal = 0
 "Make puppet-lint behave in syntastic
 let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 "
+let g:syntastic_check_on_open=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%81v', 100)
