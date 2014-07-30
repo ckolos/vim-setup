@@ -25,7 +25,7 @@ set nowb
 set number
 set report=0
 set ruler
-set shiftround
+set shiftwidth=4
 set showcmd
 set showmatch
 set showmode
