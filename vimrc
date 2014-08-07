@@ -5,7 +5,7 @@ filetype indent on
 filetype plugin on
 set t_Co=256
 set t_ut=
-set autoindent
+" 20140805 set autoindent
 set backspace=2
 set colorcolumn=+1
 set copyindent
@@ -14,22 +14,22 @@ set cursorline
 set expandtab
 set ignorecase
 set incsearch
-set joinspaces
+" 20140805 set joinspaces
 set laststatus=2
 set list listchars=tab:»·,trail:·
-"set modeline
-"set modelines=3
+"set modeline - obsoleted by airline
+"set modelines=3 - obsoleted by airline
 set nobackup
 set noswapfile
 set nowb
 set number
 set report=0
 set ruler
-set shiftwidth=4
+set shiftwidth=2
 set showcmd
 set showmatch
 set showmode
-set smartindent
+" 20140805 set smartindent
 set softtabstop=2
 set splitbelow
 set splitright
