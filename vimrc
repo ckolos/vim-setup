@@ -24,14 +24,14 @@ set nowb
 set number
 set report=0
 set ruler
-set shiftwidth=4
+set shiftwidth=2
 set showcmd
 set showmatch
 set showmode
 set smartindent
-set softtabstop=4
+set softtabstop=2
 set splitbelow
-set tabstop=4
+set tabstop=2
 set title
 set visualbell
 set wildchar=<TAB>
@@ -96,3 +96,14 @@ let g:syntastic_check_on_open=1
 " line. Found via Damian Conway's vim talk
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+" Inspired by https://github.com/tpope/vim-unimpaired "
+" Sets paste on and set nopaste when leaving insert mode "
+" using an autocommand "
+nnoremap <silent> yo  :set paste<cr>o
+nnoremap <silent> yO  :set paste<cr>O
+"
+" Disables paste mode when leaving insert mode
+autocmd InsertLeave *
+    \ if &paste == 1 |
+        \     set nopaste |
+            \ endif
