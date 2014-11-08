@@ -5,7 +5,7 @@ syntax enable
 filetype on
 filetype indent on
 filetype plugin on
-set autoindent
+"set autoindent
 set backspace=2
 set copyindent
 "set cursorcolumn
@@ -28,7 +28,7 @@ set shiftwidth=2
 set showcmd
 set showmatch
 set showmode
-set smartindent
+"set smartindent
 set softtabstop=2
 set splitbelow
 set tabstop=2
