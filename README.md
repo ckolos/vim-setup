@@ -8,6 +8,7 @@ Instructions for use:
 git clone https://github.com/ckolos/vim-setup  
 vim-setup/vimsetup.sh
 
-don't remove the vim-setup dir
+Run vim to autoload bundles spec'd in the vimrc.
 
-To update the bundle/ packages, run ~/.vim/bundle/update.sh
+Use :BundleInstall! to update bundles from within vim.
+
