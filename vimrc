@@ -1,4 +1,35 @@
-call pathogen#infect()
+" Found this here:
+" http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle.."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    let iCanHazVundle=0
+endif
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+"Add your bundles here
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-pathogen'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'godlygeek/tabular'
+Bundle 'elzr/vim-json'
+Bundle 'john2x/flatui.vim'
+Bundle 'bling/vim-airline'
+Bundle 'puppetlabs/puppet-syntax-vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'vim-scripts/bufexplorer.zip'
+if iCanHazVundle == 0
+    echo "Installing Bundles, please ignore key map error messages"
+    echo ""
+    :BundleInstall
+endif
 set t_Co=256
 set t_ut=
 syntax enable
