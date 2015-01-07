@@ -119,6 +119,10 @@ noremap <F6> <ESC>:set number<CR>
 "JSON Filetype setting
 let g:vim_json_syntax_conceal = 0
 
+"Set airline theme
+let g:airline_theme="luna"
+
+
 " Puppet Syntax 
 let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 let g:syntastic_check_on_open=1
@@ -127,14 +131,47 @@ let g:syntastic_check_on_open=1
 " line. Found via Damian Conway's vim talk
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
+
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
 " using an autocommand "
 nnoremap <silent> yo  :set paste<cr>o
 nnoremap <silent> yO  :set paste<cr>O
-"
+
 " Disables paste mode when leaving insert mode
 autocmd InsertLeave *
     \ if &paste == 1 |
-        \     set nopaste |
-            \ endif
+    \     set nopaste |
+    \ endif
+
+" Use ctrl+{hjkl} to navigate windows
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Wildcard menu stuff 
+set wildmenu " Show list instead of just completing
+set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
+"" From http://blog.sanctum.geek.nz/lazier-tab-completion/
+if exists("&wildignorecase")
+set wildignorecase " Ignore case in file name completion
+endif
+"" From http://bitbucket.org/sjl/dotfiles/overview
+set wildignore+=.hg,.git,.svn " Version control
+set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl " compiled spelling word lists
+set wildignore+=*.sw? " Vim swap files
+set wildignore+=*.DS_Store " OSX bullshit
+set wildignore+=*.luac " Lua byte code
+set wildignore+=migrations " Django migrations
+set wildignore+=*.pyc " Python byte code
+set wildignore+=*.orig " Merge resolution files
+ """ Show Hidden Chars """ {{{
+ set list " Shows certain hidden chars
+ set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
+ hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
+ hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
+ """ End Hidden Chars """ }}}
