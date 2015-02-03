@@ -25,6 +25,7 @@ Bundle 'bling/vim-airline'
 Bundle 'puppetlabs/puppet-syntax-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'vim-scripts/gnupg.vim'
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
