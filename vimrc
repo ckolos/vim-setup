@@ -172,7 +172,7 @@ set wildignore+=*.pyc " Python byte code
 set wildignore+=*.orig " Merge resolution files
  """ Show Hidden Chars """ {{{
  set list " Shows certain hidden chars
- set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
+" set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
  hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
  """ End Hidden Chars """ }}}
