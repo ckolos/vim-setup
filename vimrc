@@ -12,7 +12,6 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-a
 Bundle 'gmarik/vundle'
 "Add your bundles here
 Bundle 'altercation/vim-colors-solarized'
@@ -38,10 +37,10 @@ syntax enable
 filetype on
 filetype indent on
 filetype plugin on
-"set autoindent
+" set autoindent
 set backspace=2
 set copyindent
-"set cursorcolumn
+" set cursorcolumn
 set cursorline
 set expandtab
 set ignorecase
@@ -61,7 +60,7 @@ set shiftwidth=2
 set showcmd
 set showmatch
 set showmode
-"set smartindent
+" set smartindent
 set softtabstop=2
 set splitbelow
 set tabstop=2
@@ -70,13 +69,13 @@ set visualbell
 set wildchar=<TAB>
 set wildmode=list:longest,full
 set wrapscan
-"if has('gui_running')
-"    set background=light
-"    colorscheme borland
-"else
-    set background=dark
-    colorscheme Tomorrow-Night
-"endif
+" if has('gui_running')
+"     set background=light
+"     colorscheme borland
+" else
+set background=dark
+colorscheme Tomorrow-Night
+" endif
 
 
 iab YDATE <TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
@@ -105,11 +104,13 @@ else
 endif
 
 au BufRead /tmp/mutt*
-   \ set filetype=mail
+  \ set filetype=mail
+
+au BufRead,BufNewFile *.json :silent filetype=json
 
 " Set up puppet manifest and spec options
-au BufRead,BufNewFile *.pp
-   \ set filetype=puppet
+ au BufRead,BufNewFile *.pp
+    \ set filetype=puppet
 
 au BufRead,BufNewFile *_spec.rb
     \ nmap <F8> :!rspec --color %<CR>
@@ -141,6 +142,9 @@ call matchadd('ColorColumn', '\%81v', 100)
 " using an autocommand "
 nnoremap <silent> yo  :set paste<cr>o
 nnoremap <silent> yO  :set paste<cr>O
+nnoremap <silent> ao  :set paste<cr>o
+nnoremap <silent> aO  :set paste<cr>O
+
 
 " Disables paste mode when leaving insert mode
 autocmd InsertLeave *
@@ -157,10 +161,12 @@ nnoremap <C-l> <C-w>l
 " Wildcard menu stuff 
 set wildmenu " Show list instead of just completing
 set wildmode=list:longest,full " Command <Tab> completion, list matches, then longest common part, then all.
+
 "" From http://blog.sanctum.geek.nz/lazier-tab-completion/
 if exists("&wildignorecase")
 set wildignorecase " Ignore case in file name completion
 endif
+
 "" From http://bitbucket.org/sjl/dotfiles/overview
 set wildignore+=.hg,.git,.svn " Version control
 set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
@@ -173,9 +179,10 @@ set wildignore+=*.luac " Lua byte code
 set wildignore+=migrations " Django migrations
 set wildignore+=*.pyc " Python byte code
 set wildignore+=*.orig " Merge resolution files
- """ Show Hidden Chars """ {{{
+
+""" Show Hidden Chars """ {{{
 " set list " Shows certain hidden chars
 " set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
- hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
- hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
- """ End Hidden Chars """ }}}
+"  hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
+"  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
+""" End Hidden Chars """ }}}
