@@ -107,9 +107,6 @@ endif
 au BufRead /tmp/mutt*
    \ set filetype=mail
 
-au BufRead,BufNewFile *.json 
-   \ set filetype=json
-
 " Set up puppet manifest and spec options
 au BufRead,BufNewFile *.pp
    \ set filetype=puppet
