@@ -1,3 +1,4 @@
+set t_Co=256
 " Found this here:
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 let iCanHazVundle=1
@@ -11,6 +12,7 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+a
 Bundle 'gmarik/vundle'
 "Add your bundles here
 Bundle 'altercation/vim-colors-solarized'
@@ -31,7 +33,6 @@ if iCanHazVundle == 0
     echo ""
     :BundleInstall
 endif
-set t_Co=256
 set t_ut=
 syntax enable
 filetype on
@@ -69,6 +70,14 @@ set visualbell
 set wildchar=<TAB>
 set wildmode=list:longest,full
 set wrapscan
+"if has('gui_running')
+"    set background=light
+"    colorscheme borland
+"else
+    set background=dark
+    colorscheme Tomorrow-Night
+"endif
+
 
 iab YDATE <TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab CCK  <TAB>Chris Kolosiwsky
@@ -95,15 +104,8 @@ else
     set complete=.,w,b,u,t,i
 endif
 
-if has('gui_running')
-    set background=light
-    colorscheme borland
-else
-    set background=dark
-    colorscheme Tomorrow-Night
-endif
-
 au BufRead /tmp/mutt* :silent set filetype=mail
+au BufRead,BufNewFile *.json :silent filetype=json
 
 " Set up puppet manifest and spec options
 au BufRead,BufNewFile *.pp
