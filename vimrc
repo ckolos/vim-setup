@@ -104,12 +104,16 @@ else
     set complete=.,w,b,u,t,i
 endif
 
-au BufRead /tmp/mutt* :silent set filetype=mail
-au BufRead,BufNewFile *.json :silent filetype=json
+au BufRead /tmp/mutt*
+   \ set filetype=mail
+
+au BufRead,BufNewFile *.json 
+   \ set filetype=json
 
 " Set up puppet manifest and spec options
 au BufRead,BufNewFile *.pp
    \ set filetype=puppet
+
 au BufRead,BufNewFile *_spec.rb
     \ nmap <F8> :!rspec --color %<CR>
 
