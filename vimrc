@@ -187,3 +187,4 @@ set wildignore+=*.orig " Merge resolution files
 "  hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
 "  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
 """ End Hidden Chars """ }}}
+""
