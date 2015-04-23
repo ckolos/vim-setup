@@ -73,7 +73,7 @@ set wrapscan
 "     set background=light
 "     colorscheme borland
 " else
-set background=dark
+"set background=dark
 colorscheme Tomorrow-Night
 " endif
 
