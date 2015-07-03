@@ -37,6 +37,8 @@ syntax enable
 filetype on
 filetype indent on
 filetype plugin on
+" Default leader is \
+let mapleader = ","
 " set autoindent
 set backspace=2
 set copyindent
