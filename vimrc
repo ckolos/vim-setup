@@ -150,15 +150,15 @@ set wildmode=list:longest,full
 set wrapscan
 
 " Set color options based on gui running; I don't normally use the gui anymore
-" if has('gui_running')
-"     set background=light
-"     colorscheme borland
-" else
-"set background=dark
-" 
-" Tomorrow-Night ftw.
-colorscheme Tomorrow-Night
-" endif
+" Check to see if we're using OSX by looking for sw_vers
+if strlen(system("which sw_vers"))  > 0
+  set background=light
+  colorscheme flatui
+else
+  set background=dark
+  " Tomorrow-Night ftw.
+  colorscheme Tomorrow-Night
+endif
 
 " Some abbreviations
 iab YDATE <TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
