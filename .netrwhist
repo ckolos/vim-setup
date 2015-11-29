@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/ckolos/Source/mozilla/git/svcops/cloudformations/firefox-accounts/ansible/fxa-admin/templates'
+let g:netrw_dirhist_2='/home/ckolos/Source/mozilla/git/svcops/cloudformations/firefox-accounts'
+let g:netrw_dirhist_3='/home/ckolos/work/datadog/prod'
+let g:netrw_dirhist_4='/home/ckolos/work/docker/archlinux/minecraftserver'
