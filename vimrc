@@ -49,6 +49,9 @@ filetype plugin on
 " Change leader to ,
 let mapleader = ","
 
+" Remove .netrwhist files
+let g:netrw_dirhistmax = 0
+
 " allow backspace to remove indent,eol, and start of doc
 set backspace=2
 
