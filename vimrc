@@ -24,11 +24,13 @@ Bundle 'tpope/vim-markdown'
 Bundle 'godlygeek/tabular'
 Bundle 'elzr/vim-json'
 Bundle 'john2x/flatui.vim'
-Bundle 'bling/vim-airline'
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
 Bundle 'puppetlabs/puppet-syntax-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/gnupg.vim'
+Bundle 'vimoutliner/vimoutliner'
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
