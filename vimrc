@@ -49,7 +49,7 @@ filetype indent on
 filetype plugin on
 "
 " Change leader to ,
-let mapleader = ","
+" let mapleader = ","
 
 " Remove .netrwhist files
 let g:netrw_dirhistmax = 0
@@ -159,6 +159,7 @@ set wrapscan
 if strlen(system("which sw_vers"))  > 0
   set background=light
   colorscheme flatui
+  hi CursorLine   cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
 else
   set background=dark
   " Tomorrow-Night ftw.
@@ -227,6 +228,7 @@ let g:airline_theme="luna"
 " Puppet Syntax overrides for syntastic vundle
 let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 let g:syntastic_check_on_open=1
+let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
