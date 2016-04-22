@@ -163,7 +163,7 @@ if strlen(system("which sw_vers"))  > 0
 else
   set background=dark
   " Tomorrow-Night ftw.
-  colorscheme Tomorrow-Night
+  colorscheme gentooish
 endif
 
 " Some abbreviations
