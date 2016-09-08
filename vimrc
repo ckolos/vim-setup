@@ -31,6 +31,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/gnupg.vim'
 Bundle 'vimoutliner/vimoutliner'
+"Bundle 'edkolev/tmuxline.vim'
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
@@ -163,7 +164,8 @@ if strlen(system("which sw_vers"))  > 0
 else
   set background=dark
   " Tomorrow-Night ftw.
-  colorscheme gentooish
+  " colorscheme gentooish
+  colorscheme wombat_eclm
 endif
 
 " Some abbreviations
@@ -221,14 +223,16 @@ noremap <F6> <ESC>:set number<CR>
 " JSON Filetype setting - needed for the json vundle
 let g:vim_json_syntax_conceal = 0
 
-" Set airline theme
+" Set airline theme and font
+"
 let g:airline_theme="luna"
 
 
 " Puppet Syntax overrides for syntastic vundle
 let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 let g:syntastic_check_on_open=1
-let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
+" let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
+let g:syntastic_python_flake8_args="--ignore=E401,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
