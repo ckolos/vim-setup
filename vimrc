@@ -232,7 +232,7 @@ let g:airline_theme="luna"
 let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 let g:syntastic_check_on_open=1
 " let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
-let g:syntastic_python_flake8_args="--ignore=E401,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
+let g:syntastic_python_flake8_args="--ignore=E401,E501,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
