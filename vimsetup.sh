@@ -11,7 +11,7 @@ else
 fi
 
 cd $HOME
-test -f  "$VIMRC" && echo /bin/mv "${VIMRC}" "${VIMRC}.bak"
-test -f "$VIMDIR" && echo /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
-echo ln -s $HERE $HOME/.vim
-echo ln -s $HERE/vimrc $HOME/.vimrc
+test -f  "$VIMRC" && /bin/mv "${VIMRC}" "${VIMRC}.bak"
+test -f "$VIMDIR" && /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
+ln -s $HERE $HOME/.vim
+ln -s $HERE/vimrc $HOME/.vimrc
