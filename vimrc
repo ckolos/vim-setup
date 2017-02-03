@@ -27,11 +27,14 @@ Bundle 'john2x/flatui.vim'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'puppetlabs/puppet-syntax-vim'
-Bundle 'scrooloose/syntastic'
+"
+"Bundle 'scrooloose/syntastic'
+"
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/gnupg.vim'
 Bundle 'vimoutliner/vimoutliner'
 "Bundle 'edkolev/tmuxline.vim'
+Plugin 'w0rp/ale'
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
@@ -226,6 +229,7 @@ let g:vim_json_syntax_conceal = 0
 " Set airline theme and font
 "
 let g:airline_theme="luna"
+let g:airline_powerline_fonts = 1
 
 
 " Puppet Syntax overrides for syntastic vundle
