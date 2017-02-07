@@ -3,6 +3,7 @@ set t_Co=256
 
 " Found this here:
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
+
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
 if !filereadable(vundle_readme)
@@ -14,27 +15,27 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-Bundle 'gmarik/vundle'
-"Add your bundles here
+
+" Add your bundles here
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'tpope/vim-pathogen'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'godlygeek/tabular'
+" Bundle 'edkolev/tmuxline.vim'
 Bundle 'elzr/vim-json'
+Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
 Bundle 'john2x/flatui.vim'
+Bundle 'puppetlabs/puppet-syntax-vim'
+" Bundle 'scrooloose/syntastic'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-pathogen'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
-Bundle 'puppetlabs/puppet-syntax-vim'
-"
-"Bundle 'scrooloose/syntastic'
-"
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'vim-scripts/gnupg.vim'
-Bundle 'vimoutliner/vimoutliner'
-"Bundle 'edkolev/tmuxline.vim'
+" Bundle 'vimoutliner/vimoutliner'
 Plugin 'w0rp/ale'
+
 if iCanHazVundle == 0
     echo "Installing Bundles, please ignore key map error messages"
     echo ""
@@ -46,6 +47,7 @@ set t_ut=
 
 " turn on syntax highlighting
 syntax enable
+
 " used to trigger the FileType event
 " used to set the syntax highlighting, set options, etc
 filetype on
@@ -144,7 +146,6 @@ set title
 " Flash the screen, no beep.
 set visualbell
 
-
 " Use a menu for wild mode
 set wildmenu
 
@@ -227,16 +228,22 @@ noremap <F6> <ESC>:set number<CR>
 let g:vim_json_syntax_conceal = 0
 
 " Set airline theme and font
-"
 let g:airline_theme="luna"
 let g:airline_powerline_fonts = 1
 
-
-" Puppet Syntax overrides for syntastic vundle
-let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
-let g:syntastic_check_on_open=1
+" Syntastic configs
+" let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
+" let g:syntastic_check_on_open=1
 " let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
-let g:syntastic_python_flake8_args="--ignore=E401,E501,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
+" let g:syntastic_python_flake8_args="--ignore=E401,E501,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
+"
+" w0pr/ale tweaks - https://github.com/w0rp/ale
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_sign_error = '!!'
+let g:ale_sign_warning = '--'
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
@@ -251,7 +258,6 @@ nnoremap <silent> yO  :set paste<cr>O
 nnoremap <silent> ao  :set paste<cr>o
 nnoremap <silent> aO  :set paste<cr>O
 
-
 " Disables paste mode when leaving insert mode
 autocmd InsertLeave *
     \ if &paste == 1 |
@@ -264,13 +270,13 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
-"" From http://blog.sanctum.geek.nz/lazier-tab-completion/
+" From http://blog.sanctum.geek.nz/lazier-tab-completion/
 " Ignore case in file name completion
 if exists("&wildignorecase")
 set wildignorecase
 endif
 
-"" From http://bitbucket.org/sjl/dotfiles/overview
+" From http://bitbucket.org/sjl/dotfiles/overview
 set wildignore+=.hg,.git,.svn " Version control
 set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg " binary images
@@ -283,7 +289,7 @@ set wildignore+=migrations " Django migrations
 set wildignore+=*.pyc " Python byte code
 set wildignore+=*.orig " Merge resolution files
 
-""" Show Hidden Chars """ {{{
+" Show Hidden Chars
 " I love/hate these. Be careful: when you turn them on, they show up in
 " cut/paste operations.
 "
@@ -291,4 +297,4 @@ set wildignore+=*.orig " Merge resolution files
 " set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
 "  hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
 "  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
-""" End Hidden Chars """ }}}
+""" End Hidden Chars
