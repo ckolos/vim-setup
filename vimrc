@@ -161,13 +161,12 @@ set wrapscan
 
 " Set color options based on gui running; I don't normally use the gui anymore
 " Check to see if we're using OSX by looking for sw_vers
-if strlen(system("which sw_vers"))  > 0
+if strlen(system("\which sw_vers"))  > 0
   set background=light
-  colorscheme flatui
+  colorscheme peaksea
   hi CursorLine   cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
 else
   set background=dark
-  " Tomorrow-Night ftw.
   " colorscheme gentooish
   colorscheme wombat_eclm
 endif
