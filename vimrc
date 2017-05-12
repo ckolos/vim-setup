@@ -161,14 +161,15 @@ set wrapscan
 
 " Set color options based on gui running; I don't normally use the gui anymore
 " Check to see if we're using OSX by looking for sw_vers
-if strlen(system("\which sw_vers"))  > 0
+if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
   set background=light
   colorscheme peaksea
   hi CursorLine   cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
 else
   set background=dark
   " colorscheme gentooish
-  colorscheme wombat_eclm
+  " colorscheme wombat_eclm
+  colors github
 endif
 
 " Some abbreviations
@@ -297,3 +298,33 @@ set wildignore+=*.orig " Merge resolution files
 "  hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
 "  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
 """ End Hidden Chars
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
