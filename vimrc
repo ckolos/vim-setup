@@ -1,45 +1,50 @@
+" Use vim mode, not vi-compatible
+set nocompatible
+
+filetype off
+
 " override the terminal colors and force 256 color mode
 set t_Co=256
-
 " Found this here:
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
 
 let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme)
     echo "Installing Vundle.."
     echo ""
     silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     let iCanHazVundle=0
 endif
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 " Add your bundles here
-Bundle 'altercation/vim-colors-solarized'
-" Bundle 'edkolev/tmuxline.vim'
-Bundle 'elzr/vim-json'
-Bundle 'gmarik/vundle'
-Bundle 'godlygeek/tabular'
-Bundle 'john2x/flatui.vim'
-Bundle 'puppetlabs/puppet-syntax-vim'
-" Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-pathogen'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'vim-scripts/bufexplorer.zip'
-Bundle 'vim-scripts/gnupg.vim'
-" Bundle 'vimoutliner/vimoutliner'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'elzr/vim-json'
+Plugin 'godlygeek/tabular'
+Plugin 'john2x/flatui.vim'
+Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-markdown'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-scripts/bufexplorer.zip'
+Plugin 'vim-scripts/gnupg.vim'
 Plugin 'w0rp/ale'
+" Plugin 'vimoutliner/vimoutliner'
+" Plugin 'tpope/vim-pathogen'
+" Plugin 'edkolev/tmuxline.vim'
+" Plugin 'scrooloose/syntastic'
 
 if iCanHazVundle == 0
-    echo "Installing Bundles, please ignore key map error messages"
+    echo "Installing Plugins, please ignore key map error messages"
     echo ""
-    :BundleInstall
+    :PluginInstall
 endif
 
 " clearing uses the current background color
@@ -94,9 +99,6 @@ set modelines=3
 
 " Don't create backups when overwriting a file
 set nobackup
-
-" Use vim mode, not vi-compatible
-set nocompatible
 
 " Don't use a swap file
 set noswapfile
@@ -165,11 +167,13 @@ if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
   set background=light
   colorscheme peaksea
   hi CursorLine   cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
+  let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 else
   set background=dark
   " colorscheme gentooish
   " colorscheme wombat_eclm
   colors github
+  let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 endif
 
 " Some abbreviations
@@ -241,7 +245,7 @@ let g:airline_powerline_fonts = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '--'
 
@@ -328,3 +332,9 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+" ----- jistr/vim-nerdtree-tabs -----
+" Open/close NERDTree Tabs with \t
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" To have NERDTree always open on startup
+let g:nerdtree_tabs_open_on_console_startup = 1
