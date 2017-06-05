@@ -337,4 +337,6 @@ let g:airline_symbols.linenr = ''
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
-let g:nerdtree_tabs_open_on_console_startup = 1
+"
+" let g:nerdtree_tabs_open_on_console_startup = 1
+" let g:powerline_pycmd = "py3"
