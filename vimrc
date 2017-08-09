@@ -21,25 +21,27 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 " Add your bundles here
+" Look and Feel
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'elzr/vim-json'
-Plugin 'godlygeek/tabular'
 Plugin 'john2x/flatui.vim'
-Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-markdown'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'vim-scripts/bufexplorer.zip'
-Plugin 'vim-scripts/gnupg.vim'
+" Syntax and file type
 Plugin 'w0rp/ale'
-" Plugin 'vimoutliner/vimoutliner'
-" Plugin 'tpope/vim-pathogen'
-" Plugin 'edkolev/tmuxline.vim'
-" Plugin 'scrooloose/syntastic'
+Plugin 'elzr/vim-json'
+Plugin 'tpope/vim-markdown'
+Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'vim-scripts/gnupg.vim'
+" Git Shit
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
+" NerdTree
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'vim-scripts/bufexplorer.zip'
+" Misc
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'godlygeek/tabular'
 
 if iCanHazVundle == 0
     echo "Installing Plugins, please ignore key map error messages"
@@ -339,4 +341,3 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
 "
 " let g:nerdtree_tabs_open_on_console_startup = 1
-" let g:powerline_pycmd = "py3"
