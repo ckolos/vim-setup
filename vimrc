@@ -163,7 +163,6 @@ set wildmode=list:longest,full
 " wrap the file when stepping through search matches
 set wrapscan
 
-" Set color options based on gui running; I don't normally use the gui anymore
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
   set background=light
@@ -253,8 +252,10 @@ let g:ale_sign_warning = '--'
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" 2017/09/10 - This now causes issues with trailing spaces
+" https://vi.stackexchange.com/questions/10597/trailing-spaces-when-copying-text-from-vim-session-in-one-server-to-vim-session
+"highlight ColorColumn ctermbg=magenta
+"call matchadd('ColorColumn', '\%81v', 100)
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
