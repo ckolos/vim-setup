@@ -21,27 +21,56 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 " Add your bundles here
+Plugin 'VundleVim/Vundle.vim'
 " Look and Feel
+Plugin 'itchyny/lightline.vim'
+"Plugin 'chriskempson/base16-vim'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Gentooish-II'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'baverman/vim-babymate256'
+Plugin 'borland.vim'
+Plugin 'cdaddr/gentooish.vim'
+Plugin 'chriskempson/vim-tomorrow-theme'
+Plugin 'ciaranm/inkpot'
+Plugin 'desert256.vim'
+Plugin 'durgaswaroop/vim-lunarized'
+Plugin 'ibmedit.vim'
+Plugin 'joedicastro/vim-github256'
+Plugin 'jnurmine/zenburn'
 Plugin 'john2x/flatui.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'notpratheek/vim-luna'
+Plugin 'peaksea'
+Plugin 'primary.vim'
+Plugin 'rainux/vim-desert-warm-256'
+Plugin 'tomasr/molokai'
+Plugin 'w0ng/vim-hybrid'
+Plugin 'wombat256.vim'
 " Syntax and file type
 Plugin 'w0rp/ale'
 Plugin 'elzr/vim-json'
 Plugin 'tpope/vim-markdown'
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'vim-scripts/gnupg.vim'
+
 " Git Shit
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
+
 " NerdTree
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
+
 "Plugin 'vim-scripts/bufexplorer.zip'
 " Misc
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'junegunn/fzf.vim'
+call vundle#end()
 
 if iCanHazVundle == 0
     echo "Installing Plugins, please ignore key map error messages"
@@ -61,8 +90,8 @@ filetype on
 filetype indent on
 filetype plugin on
 "
-" Change leader to ,
-" let mapleader = ","
+" Change leader to \
+" let mapleader = "\"
 
 " Remove .netrwhist files
 let g:netrw_dirhistmax = 0
@@ -127,7 +156,7 @@ set showcmd
 set showmatch
 
 " Show the current mode of operation APPEND/INSERT/VISUAL etc
-set showmode
+"set showmode
 
 " insert indentation auto-magically when a c-like word is used; usually
 " doesn't work as expected for me.
@@ -172,8 +201,8 @@ if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
 else
   set background=dark
   " colorscheme gentooish
-  " colorscheme wombat_eclm
-  colors github
+  colorscheme wombat_eclm
+  "colors github
   let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 endif
 
@@ -233,8 +262,8 @@ noremap <F6> <ESC>:set number<CR>
 let g:vim_json_syntax_conceal = 0
 
 " Set airline theme and font
-let g:airline_theme="luna"
-let g:airline_powerline_fonts = 1
+"let g:airline_theme="luna"
+"let g:airline_powerline_fonts = 1
 
 " Syntastic configs
 " let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
@@ -252,7 +281,6 @@ let g:ale_sign_warning = '--'
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
-" 2017/09/10 - This now causes issues with trailing spaces
 " https://vi.stackexchange.com/questions/10597/trailing-spaces-when-copying-text-from-vim-session-in-one-server-to-vim-session
 "highlight ColorColumn ctermbg=magenta
 "call matchadd('ColorColumn', '\%81v', 100)
@@ -307,38 +335,48 @@ set wildignore+=*.orig " Merge resolution files
 """ End Hidden Chars
 
 " air-line
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
+"let g:airline_powerline_fonts = 1
+"
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"
+"" unicode symbols
+"let g:airline_left_sep = '»'
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
+"
+"" airline symbols
+"let g:airline_left_sep = ''
+"let g:airline_left_alt_sep = ''
+"let g:airline_right_sep = ''
+"let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+"let g:airline_symbols.readonly = ''
+"let g:airline_symbols.linenr = ''
+"
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
 "
 " let g:nerdtree_tabs_open_on_console_startup = 1
+let g:lightline = {
+      \ 'colorscheme': 'Tomorrow_Night_Blue',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
