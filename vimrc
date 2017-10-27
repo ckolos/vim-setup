@@ -31,7 +31,6 @@ Plugin 'Gentooish-II'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'baverman/vim-babymate256'
-Plugin 'borland.vim'
 Plugin 'cdaddr/gentooish.vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'ciaranm/inkpot'
@@ -58,6 +57,7 @@ Plugin 'vim-scripts/gnupg.vim'
 
 " Git Shit
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-git'
 
 " NerdTree
@@ -370,6 +370,10 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " To have NERDTree always open on startup
 "
 " let g:nerdtree_tabs_open_on_console_startup = 1
+"
+nmap <silent> <leader>d :ALEDisable<CR>
+nmap <silent> <leader>e :ALEEnable<CR>
+nmap <silent> <leader>s :%s/[ ]\+$//<CR>
 let g:lightline = {
       \ 'colorscheme': 'Tomorrow_Night_Blue',
       \ 'active': {
