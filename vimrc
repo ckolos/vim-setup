@@ -366,14 +366,20 @@ set wildignore+=*.orig " Merge resolution files
 "
 " ----- jistr/vim-nerdtree-tabs -----
 " Open/close NERDTree Tabs with \t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
-" To have NERDTree always open on startup
 "
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+
+" To have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 "
+" Disable/Enable ALE with leader d/e
 nmap <silent> <leader>d :ALEDisable<CR>
 nmap <silent> <leader>e :ALEEnable<CR>
+
+" Poor-man's trailing white-space removal
 nmap <silent> <leader>s :%s/[ ]\+$//<CR>
+" Poor-man's sort
+nmap <silent> <leader>o :,$!sort -g<CR>
 let g:lightline = {
       \ 'colorscheme': 'Tomorrow_Night_Blue',
       \ 'active': {
