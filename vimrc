@@ -91,7 +91,7 @@ filetype indent on
 filetype plugin on
 "
 " Change leader to \
-" let mapleader = "\"
+let mapleader = ","
 
 " Remove .netrwhist files
 let g:netrw_dirhistmax = 0
