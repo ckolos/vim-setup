@@ -91,7 +91,7 @@ filetype indent on
 filetype plugin on
 "
 " Change leader to \
-" let mapleader = "\"
+let mapleader = ","
 
 " Remove .netrwhist files
 let g:netrw_dirhistmax = 0
@@ -111,8 +111,8 @@ set cursorline
 " Expand tabs into spaces; I dislike tabs. If I need one, CTRL-V <TAB>
 set expandtab
 
-" Ignore case in searches
-set ignorecase
+" Use smartcase for searching
+set smartcase
 
 " Incremental search = on
 set incsearch
@@ -201,7 +201,7 @@ if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
 else
   set background=dark
   " colorscheme gentooish
-  colorscheme wombat_eclm
+  colorscheme wombat256mod
   "colors github
   let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 endif
@@ -380,6 +380,8 @@ nmap <silent> <leader>e :ALEEnable<CR>
 nmap <silent> <leader>s :%s/[ ]\+$//<CR>
 " Poor-man's sort
 nmap <silent> <leader>o :,$!sort -g<CR>
+"
+nmap <silent> <leader>c :set cursorcolumn!<CR>
 let g:lightline = {
       \ 'colorscheme': 'Tomorrow_Night_Blue',
       \ 'active': {
