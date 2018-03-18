@@ -383,7 +383,7 @@ nmap <silent> <leader>o :,$!sort -g<CR>
 "
 nmap <silent> <leader>c :set cursorcolumn!<CR>
 let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night_Blue',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
