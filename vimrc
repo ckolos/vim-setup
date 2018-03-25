@@ -226,6 +226,9 @@ noremap \y "+y
 noremap \Y "+Y
 noremap \p "+p
 
+" (i)map - insertion mode maps
+imap <TAB> <C-N>
+
 " Completion (CTRL-N/P)
 if has("unix")
     set complete=.,w,b,u,t,i,k
