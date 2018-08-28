@@ -231,10 +231,10 @@ imap <TAB> <C-N>
 
 " Completion (CTRL-N/P)
 if has("unix")
-    set complete=.,w,b,u,t,i,k
+    set complete=.,i,w,b,u,t,k
     set dictionary=/usr/share/dict/words
 else
-    set complete=.,w,b,u,t,i
+    set complete=.,i,w,b,u,t
 endif
 
 " if using mutt to compose mail, set filetype to mail
