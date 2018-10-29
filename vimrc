@@ -1,13 +1,9 @@
 " Use vim mode, not vi-compatible
 set nocompatible
-
 filetype off
-
-" override the terminal colors and force 256 color mode
-set t_Co=256
+"
 " Found this here:
 " http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
-
 let iCanHazVundle=1
 let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
 if !filereadable(vundle_readme)
@@ -19,52 +15,62 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
-
 " Add your bundles here
 Plugin 'VundleVim/Vundle.vim'
+"
 " Look and Feel
+Plugin 'antlypls/vim-colors-codeschool'
 Plugin 'itchyny/lightline.vim'
 "Plugin 'chriskempson/base16-vim'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Gentooish-II'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'baverman/vim-babymate256'
-Plugin 'cdaddr/gentooish.vim'
+"Plugin 'altercation/vim-colors-solarized'
+"Plugin 'baverman/vim-babymate256'
+Plugin 'bruschill/madeofcode'
+"Plugin 'cdaddr/gentooish.vim'
 Plugin 'chriskempson/vim-tomorrow-theme'
 Plugin 'ciaranm/inkpot'
-Plugin 'desert256.vim'
-Plugin 'durgaswaroop/vim-lunarized'
+"Plugin 'desert256.vim'
+"Plugin 'durgaswaroop/vim-lunarized'
 Plugin 'ibmedit.vim'
+Plugin 'itchyny/landscape.vim'
 Plugin 'joedicastro/vim-github256'
 Plugin 'jnurmine/zenburn'
 Plugin 'john2x/flatui.vim'
-Plugin 'junegunn/seoul256.vim'
+"Plugin 'junegunn/seoul256.vim'
+Plugin 'marcopaganini/termschool-vim-theme'
+Plugin 'neutaaaaan/iosvkem'
 Plugin 'notpratheek/vim-luna'
 Plugin 'peaksea'
 Plugin 'primary.vim'
-Plugin 'rainux/vim-desert-warm-256'
+Plugin 'pkukulak/idle'
+"Plugin 'rainux/vim-desert-warm-256'
+Plugin 'reewr/vim-monokai-phoenix'
+"Plugin 'Siphalor/vim-atomified'
 Plugin 'tomasr/molokai'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'wombat256.vim'
+"
 " Syntax and file type
-Plugin 'w0rp/ale'
 Plugin 'elzr/vim-json'
-Plugin 'tpope/vim-markdown'
 Plugin 'puppetlabs/puppet-syntax-vim'
+Plugin 'tpope/vim-markdown'
 Plugin 'vim-scripts/gnupg.vim'
-
+Plugin 'w0rp/ale'
+"
 " Git Shit
+Plugin 'airblade/vim-gitgutter'
+Plugin 'itchyny/vim-gitbranch'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-git'
-
+Plugin 'tpope/vim-rhubarb'
+"
 " NerdTree
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-
 "Plugin 'vim-scripts/bufexplorer.zip'
+"
 " Misc
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
@@ -76,6 +82,17 @@ if iCanHazVundle == 0
     echo "Installing Plugins, please ignore key map error messages"
     echo ""
     :PluginInstall
+endif
+"
+" override the terminal colors and force 256 color mode
+if &term =~# 'rxvt-unicode-256color'
+  set t_Co=256
+  colorscheme wombat256mod
+else
+  set termguicolors " 24-bit terminal
+  let &t_8f = "[38;2;%lu;%lu;%lum"
+  let &t_8b = "[48;2;%lu;%lu;%lum"
+  colorscheme monokai-phoenix
 endif
 
 " clearing uses the current background color
@@ -169,6 +186,9 @@ set softtabstop=2
 " when splitting, set the new window under the current window
 set splitbelow
 
+" Always show the tabline
+set showtabline=2
+
 " Number of spaces per tab when not editing; i.e. how does a tab 'look'
 set tabstop=2
 
@@ -195,14 +215,11 @@ set wrapscan
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
   set background=light
-  colorscheme peaksea
-  hi CursorLine   cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
+  colorscheme github256
+  hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 else
   set background=dark
-  " colorscheme gentooish
-  colorscheme wombat256mod
-  "colors github
   let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 endif
 
@@ -385,13 +402,59 @@ nmap <silent> <leader>s :%s/[ ]\+$//<CR>
 nmap <silent> <leader>o :,$!sort -g<CR>
 "
 nmap <silent> <leader>c :set cursorcolumn!<CR>
+" :h g:lightline.colorscheme
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'OldHope',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
+" Rename tabs to show tab number.
+" (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
+if exists("+showtabline")
+    function! MyTabLine()
+        let s = ''
+        let wn = ''
+        let t = tabpagenr()
+        let i = 1
+        while i <= tabpagenr('$')
+            let buflist = tabpagebuflist(i)
+            let winnr = tabpagewinnr(i)
+            let s .= '%' . i . 'T'
+            let s .= (i == t ? '%1*' : '%2*')
+            let s .= ' '
+            let wn = tabpagewinnr(i,'$')
+
+            let s .= '%#TabNum#'
+            let s .= i
+            " let s .= '%*'
+            let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+            let bufnr = buflist[winnr - 1]
+            let file = bufname(bufnr)
+            let buftype = getbufvar(bufnr, 'buftype')
+            if buftype == 'nofile'
+                if file =~ '\/.'
+                    let file = substitute(file, '.*\/\ze.', '', '')
+                endif
+            else
+                let file = fnamemodify(file, ':p:t')
+            endif
+            if file == ''
+                let file = '[No Name]'
+            endif
+            let s .= ' ' . file . ' '
+            let i = i + 1
+        endwhile
+        let s .= '%T%#TabLineFill#%='
+        let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+        return s
+    endfunction
+    set stal=2
+    set tabline=%!MyTabLine()
+    set showtabline=1
+    highlight link TabNum Special
+endif
