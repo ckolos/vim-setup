@@ -15,6 +15,7 @@ if !filereadable(vundle_readme)
 endif
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
+
 " Add your bundles here
 Plugin 'VundleVim/Vundle.vim'
 "
@@ -49,11 +50,13 @@ Plugin 'pkukulak/idle'
 Plugin 'reewr/vim-monokai-phoenix'
 "Plugin 'Siphalor/vim-atomified'
 Plugin 'tomasr/molokai'
+Plugin 'vim-scripts/icansee.vim'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'wombat256.vim'
 "
 " Syntax and file type
 Plugin 'elzr/vim-json'
+Plugin 'hashivim/vim-terraform'
 Plugin 'puppetlabs/puppet-syntax-vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'vim-scripts/gnupg.vim'
@@ -281,6 +284,9 @@ noremap <F6> <ESC>:set number<CR>
 " JSON Filetype setting - needed for the json vundle
 let g:vim_json_syntax_conceal = 0
 
+" TF Files in a different color
+autocmd BufEnter *.tf* colorscheme icansee
+
 " Set airline theme and font
 "let g:airline_theme="luna"
 "let g:airline_powerline_fonts = 1
@@ -354,38 +360,8 @@ set wildignore+=*.orig " Merge resolution files
 "  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
 """ End Hidden Chars
 
-" air-line
-"let g:airline_powerline_fonts = 1
-"
-"if !exists('g:airline_symbols')
-"    let g:airline_symbols = {}
-"endif
-"
-"" unicode symbols
-"let g:airline_left_sep = '»'
-"let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-"let g:airline_symbols.linenr = '␊'
-"let g:airline_symbols.linenr = '␤'
-"let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
-"let g:airline_symbols.paste = 'ρ'
-"let g:airline_symbols.paste = 'Þ'
-"let g:airline_symbols.paste = '∥'
-"let g:airline_symbols.whitespace = 'Ξ'
-"
-"" airline symbols
-"let g:airline_left_sep = ''
-"let g:airline_left_alt_sep = ''
-"let g:airline_right_sep = ''
-"let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-"let g:airline_symbols.readonly = ''
-"let g:airline_symbols.linenr = ''
-"
 " ----- jistr/vim-nerdtree-tabs -----
-" Open/close NERDTree Tabs with \t
+" Open/close NERDTree Tabs with <leader>t
 "
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 
@@ -395,6 +371,9 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " Disable/Enable ALE with leader d/e
 nmap <silent> <leader>d :ALEDisable<CR>
 nmap <silent> <leader>e :ALEEnable<CR>
+
+nmap <silent> <leader>g :GitGutterDisable<CR>
+nmap <silent> <leader>G :GitGutterEnable<CR>
 
 " Poor-man's trailing white-space removal
 nmap <silent> <leader>s :%s/[ ]\+$//<CR>
@@ -458,3 +437,26 @@ if exists("+showtabline")
     set showtabline=1
     highlight link TabNum Special
 endif
+
+nnoremap <silent> <Leader>C :call fzf#run({
+\   'source':
+\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+\   'sink':    'colo',
+\   'options': '+m',
+\   'left':    30
+\ })<CR>
+
+function! s:fzf_neighbouring_files()
+  let current_file =expand("%")
+  let cwd = fnamemodify(current_file, ':p:h')
+  let command = 'rg --files --no-follow  ' . cwd . ''
+
+  call fzf#run({
+        \ 'source': command,
+        \ 'sink':   'e',
+        \ 'options': '-m -x +s',
+        \ 'window':  'enew' })
+endfunction
+
+command! FZFNeigh call s:fzf_neighbouring_files()
