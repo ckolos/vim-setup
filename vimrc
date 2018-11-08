@@ -369,11 +369,8 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 " let g:nerdtree_tabs_open_on_console_startup = 1
 "
 " Disable/Enable ALE with leader d/e
-nmap <silent> <leader>d :ALEDisable<CR>
-nmap <silent> <leader>e :ALEEnable<CR>
-
-nmap <silent> <leader>g :GitGutterDisable<CR>
-nmap <silent> <leader>G :GitGutterEnable<CR>
+nmap <silent> <leader>d :ALEToggle<CR>
+nmap <silent> <leader>g :GitGutterToggle<CR>
 
 " Poor-man's trailing white-space removal
 nmap <silent> <leader>s :%s/[ ]\+$//<CR>
