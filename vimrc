@@ -285,7 +285,7 @@ noremap <F6> <ESC>:set number<CR>
 let g:vim_json_syntax_conceal = 0
 
 " TF Files in a different color
-autocmd BufEnter *.tf* colorscheme icansee
+autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
 
 " Set airline theme and font
 "let g:airline_theme="luna"
