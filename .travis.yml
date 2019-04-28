@@ -1,4 +1,5 @@
 ---
+language: minimal
 before_install:
   - sudo apt-get install -y vim
 install:
