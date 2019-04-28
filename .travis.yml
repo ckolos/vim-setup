@@ -2,5 +2,5 @@
 before_install:
   - sudo apt-get install -y vim
 install:
-  - bash -x vim-setup/vimsetup.sh
-  - vim -s vim-setup/test_script.vim
+  - bash -x vimsetup.sh
+  - vim -s test_script.vim
