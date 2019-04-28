@@ -176,7 +176,7 @@ set showcmd
 set showmatch
 
 " Show the current mode of operation APPEND/INSERT/VISUAL etc
-"set showmode
+" set showmode
 
 " insert indentation auto-magically when a c-like word is used; usually
 " doesn't work as expected for me.
@@ -232,7 +232,7 @@ iab CCK  <TAB>Chris Kolosiwsky
 iab CLM <TAB>Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>
 iab CMB <TAB>Modified By:<TAB>Chris Kolosiwsky<CR>
 iab HEA #<TAB>File: <C-R>bufname("%")<CR><CR>#<CR>#<TAB>Chris Kolosiwsky<CR><TAB>#Last Modified:<TAB><C-R>=strftime("%a %b %d %T %Z %Y")<CR>#<TAB>License: GNU Public License (http://www.gnu.org/copyleft/gpl.html)
-"
+
 " Some useful mapping to make search results appear in the middle of the
 " screen.
 " (n)map - normal mode map - only applies in normal mode
@@ -284,32 +284,36 @@ noremap <F6> <ESC>:set number<CR>
 " JSON Filetype setting - needed for the json vundle
 let g:vim_json_syntax_conceal = 0
 
-" TF Files in a different color
-autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
-
 " Set airline theme and font
-"let g:airline_theme="luna"
-"let g:airline_powerline_fonts = 1
+" let g:airline_theme="luna"
+" let g:airline_powerline_fonts = 1
 
 " Syntastic configs
 " let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
 " let g:syntastic_check_on_open=1
 " let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
 " let g:syntastic_python_flake8_args="--ignore=E401,E501,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
-"
+
 " w0pr/ale tweaks - https://github.com/w0rp/ale
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
 " let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '--'
 
+" TF Files in a different color
+autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
+
+" terraform fmt 
+let g:terraform_fmt_on_save=1
+
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
 " https://vi.stackexchange.com/questions/10597/trailing-spaces-when-copying-text-from-vim-session-in-one-server-to-vim-session
-"highlight ColorColumn ctermbg=magenta
-"call matchadd('ColorColumn', '\%81v', 100)
+" highlight ColorColumn ctermbg=magenta
+" call matchadd('ColorColumn', '\%81v', 100)
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -367,17 +371,20 @@ nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 
 " To have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
-"
+
 " Disable/Enable ALE with leader d/e
 nmap <silent> <leader>d :ALEToggle<CR>
 nmap <silent> <leader>g :GitGutterToggle<CR>
 
 " Poor-man's trailing white-space removal
 nmap <silent> <leader>s :%s/[ ]\+$//<CR>
+
 " Poor-man's sort
 nmap <silent> <leader>o :,$!sort -g<CR>
-"
+
+" Show cursorcolumn
 nmap <silent> <leader>c :set cursorcolumn!<CR>
+
 " :h g:lightline.colorscheme
 let g:lightline = {
       \ 'colorscheme': 'OldHope',
@@ -389,6 +396,7 @@ let g:lightline = {
       \   'gitbranch': 'gitbranch#name'
       \ },
       \ }
+
 " Rename tabs to show tab number.
 " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
 if exists("+showtabline")
@@ -455,5 +463,12 @@ function! s:fzf_neighbouring_files()
         \ 'options': '-m -x +s',
         \ 'window':  'enew' })
 endfunction
+
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
 
 command! FZFNeigh call s:fzf_neighbouring_files()
