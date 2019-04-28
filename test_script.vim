@@ -1,0 +1,3 @@
+:PlugStatus
+:quit!
+:quit!
