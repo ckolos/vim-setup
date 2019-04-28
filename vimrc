@@ -2,91 +2,77 @@
 set nocompatible
 filetype off
 "
-" Found this here:
-" http://erikzaadi.com/2012/03/19/auto-installing-vundle-from-your-vimrc/
-let iCanHazVundle=1
-let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
-if !filereadable(vundle_readme)
-    echo "Installing Vundle.."
-    echo ""
-    silent !mkdir -p ~/.vim/bundle
-    silent !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    let iCanHazVundle=0
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
-
+call plug#begin('~/.vim/plugged')
 " Add your bundles here
-Plugin 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 "
 " Look and Feel
-Plugin 'antlypls/vim-colors-codeschool'
-Plugin 'itchyny/lightline.vim'
-"Plugin 'chriskempson/base16-vim'
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Gentooish-II'
-"Plugin 'altercation/vim-colors-solarized'
-"Plugin 'baverman/vim-babymate256'
-Plugin 'bruschill/madeofcode'
-"Plugin 'cdaddr/gentooish.vim'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'ciaranm/inkpot'
-"Plugin 'desert256.vim'
-"Plugin 'durgaswaroop/vim-lunarized'
-Plugin 'ibmedit.vim'
-Plugin 'itchyny/landscape.vim'
-Plugin 'joedicastro/vim-github256'
-Plugin 'jnurmine/zenburn'
-Plugin 'john2x/flatui.vim'
-"Plugin 'junegunn/seoul256.vim'
-Plugin 'marcopaganini/termschool-vim-theme'
-Plugin 'neutaaaaan/iosvkem'
-Plugin 'notpratheek/vim-luna'
-Plugin 'peaksea'
-Plugin 'primary.vim'
-Plugin 'pkukulak/idle'
-"Plugin 'rainux/vim-desert-warm-256'
-Plugin 'reewr/vim-monokai-phoenix'
-"Plugin 'Siphalor/vim-atomified'
-Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/icansee.vim'
-Plugin 'w0ng/vim-hybrid'
-Plugin 'wombat256.vim'
+Plug 'antlypls/vim-colors-codeschool'
+Plug 'itchyny/lightline.vim'
+"Plug 'chriskempson/base16-vim'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/Gentooish-II'
+"Plug 'altercation/vim-colors-solarized'
+"Plug 'baverman/vim-babymate256'
+Plug 'bruschill/madeofcode'
+"Plug 'cdaddr/gentooish.vim'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'ciaranm/inkpot'
+"Plug 'desert256.vim'
+"Plug 'durgaswaroop/vim-lunarized'
+Plug 'vim-scripts/ibmedit.vim'
+Plug 'itchyny/landscape.vim'
+Plug 'joedicastro/vim-github256'
+Plug 'jnurmine/zenburn'
+Plug 'john2x/flatui.vim'
+"Plug 'junegunn/seoul256.vim'
+Plug 'marcopaganini/termschool-vim-theme'
+Plug 'neutaaaaan/iosvkem'
+Plug 'notpratheek/vim-luna'
+Plug 'vim-scripts/peaksea'
+Plug 'vim-scripts/primary.vim'
+Plug 'pkukulak/idle'
+"Plug 'rainux/vim-desert-warm-256'
+Plug 'reewr/vim-monokai-phoenix'
+"Plug 'Siphalor/vim-atomified'
+Plug 'tomasr/molokai'
+Plug 'vim-scripts/icansee.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'vim-scripts/wombat256.vim'
 "
 " Syntax and file type
-Plugin 'elzr/vim-json'
-Plugin 'hashivim/vim-terraform'
-Plugin 'puppetlabs/puppet-syntax-vim'
-Plugin 'tpope/vim-markdown'
-Plugin 'vim-scripts/gnupg.vim'
-Plugin 'w0rp/ale'
+Plug 'elzr/vim-json'
+Plug 'hashivim/vim-terraform'
+Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'tpope/vim-markdown'
+Plug 'vim-scripts/gnupg.vim'
+Plug 'w0rp/ale'
 "
 " Git Shit
-Plugin 'airblade/vim-gitgutter'
-Plugin 'itchyny/vim-gitbranch'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-rhubarb'
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/vim-gitbranch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-rhubarb'
 "
 " NerdTree
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-"Plugin 'vim-scripts/bufexplorer.zip'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'vim-scripts/bufexplorer.zip'
 "
 " Misc
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'godlygeek/tabular'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'junegunn/fzf.vim'
-call vundle#end()
+Plug 'editorconfig/editorconfig-vim'
+Plug 'godlygeek/tabular'
+Plug 'edkolev/tmuxline.vim'
+Plug 'junegunn/fzf.vim'
+call plug#end()
 
-if iCanHazVundle == 0
-    echo "Installing Plugins, please ignore key map error messages"
-    echo ""
-    :PluginInstall
-endif
-"
 " override the terminal colors and force 256 color mode
 if &term =~# 'rxvt-unicode-256color'
   set t_Co=256
