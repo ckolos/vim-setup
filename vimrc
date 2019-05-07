@@ -71,6 +71,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'godlygeek/tabular'
 Plug 'edkolev/tmuxline.vim'
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-vinegar'
 call plug#end()
 
 " override the terminal colors and force 256 color mode
@@ -371,6 +372,7 @@ nmap <silent> <leader>o :,$!sort -g<CR>
 " Show cursorcolumn
 nmap <silent> <leader>c :set cursorcolumn!<CR>
 
+
 " :h g:lightline.colorscheme
 let g:lightline = {
       \ 'colorscheme': 'OldHope',
@@ -429,14 +431,60 @@ if exists("+showtabline")
     highlight link TabNum Special
 endif
 
+let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '>',
+    \ 'right' : '',
+    \ 'right_alt' : '<',
+    \ 'space' : ' '}
+"
+" FZF Stuff
+"
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
 nnoremap <silent> <Leader>C :call fzf#run({
 \   'source':
 \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
 \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
 \   'sink':    'colo',
-\   'options': '+m',
+\   'options': '+m --reverse',
 \   'left':    30
 \ })<CR>
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
 function! s:fzf_neighbouring_files()
   let current_file =expand("%")
@@ -450,11 +498,24 @@ function! s:fzf_neighbouring_files()
         \ 'window':  'enew' })
 endfunction
 
-let g:tmuxline_separators = {
-    \ 'left' : '',
-    \ 'left_alt': '>',
-    \ 'right' : '',
-    \ 'right_alt' : '<',
-    \ 'space' : ' '}
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
 
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 command! FZFNeigh call s:fzf_neighbouring_files()
+nnoremap <silent> <Leader>F :FZF<CR>
+nnoremap <silent> <Leader>Ff :Files<CR>
+nnoremap <silent> <Leader>Fr :Rg<CR>
+nnoremap <silent> <Leader>FL :Lines<CR>
+nnoremap <silent> <Leader>Fb :Blines<CR>
+nnoremap <silent> <Leader>Fl :Locate<CR>
+nnoremap <silent> <Leader>FH :History<CR>
+nnoremap <silent> <Leader>Fh :History:<CR>
+nnoremap <silent> <Leader>Fc :Commands<CR>
+
+nnoremap <silent> <Leader>Fc :Commands<CR>
