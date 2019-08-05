@@ -9,7 +9,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 " Add your bundles here
-Plug 'VundleVim/Vundle.vim'
+"Plug 'VundleVim/Vundle.vim'
 "
 " Look and Feel
 Plug 'antlypls/vim-colors-codeschool'
@@ -82,7 +82,8 @@ else
   set termguicolors " 24-bit terminal
   let &t_8f = "[38;2;%lu;%lu;%lum"
   let &t_8b = "[48;2;%lu;%lu;%lum"
-  colorscheme monokai-phoenix
+  "colorscheme monokai-phoenix
+  colorscheme Iosvkem
 endif
 
 " clearing uses the current background color
@@ -309,6 +310,8 @@ nnoremap <silent> yo  :set paste<cr>o
 nnoremap <silent> yO  :set paste<cr>O
 nnoremap <silent> ao  :set paste<cr>o
 nnoremap <silent> aO  :set paste<cr>O
+nnoremap <silent> Ao  :set paste<cr>o
+nnoremap <silent> AO  :set paste<cr>O
 
 " Disables paste mode when leaving insert mode
 autocmd InsertLeave *
@@ -513,9 +516,6 @@ nnoremap <silent> <Leader>Ff :Files<CR>
 nnoremap <silent> <Leader>Fr :Rg<CR>
 nnoremap <silent> <Leader>FL :Lines<CR>
 nnoremap <silent> <Leader>Fb :Blines<CR>
-nnoremap <silent> <Leader>Fl :Locate<CR>
 nnoremap <silent> <Leader>FH :History<CR>
 nnoremap <silent> <Leader>Fh :History:<CR>
-nnoremap <silent> <Leader>Fc :Commands<CR>
-
 nnoremap <silent> <Leader>Fc :Commands<CR>
