@@ -234,13 +234,23 @@ noremap \y "+y
 noremap \Y "+Y
 noremap \p "+p
 
+" Use space to toggle folds
+"
+nnoremap <Space> za
+vnoremap <Space> za
+
 " (i)map - insertion mode maps
 imap <TAB> <C-N>
 
 " Completion (CTRL-N/P)
 if has("unix")
     set complete=.,i,w,b,u,t,k
-    set dictionary=/usr/share/dict/words
+    set completeopt=longest,menuone,preview
+    " Enter key will select the highlighted menu item
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+    inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+
 else
     set complete=.,i,w,b,u,t
 endif
