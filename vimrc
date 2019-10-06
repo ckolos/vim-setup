@@ -8,43 +8,40 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
-" Add your bundles here
-"Plug 'VundleVim/Vundle.vim'
-"
 " Look and Feel
-Plug 'antlypls/vim-colors-codeschool'
-Plug 'itchyny/lightline.vim'
-"Plug 'chriskempson/base16-vim'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/Gentooish-II'
 "Plug 'altercation/vim-colors-solarized'
+Plug 'antlypls/vim-colors-codeschool'
 "Plug 'baverman/vim-babymate256'
 Plug 'bruschill/madeofcode'
 "Plug 'cdaddr/gentooish.vim'
+"Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ciaranm/inkpot'
 "Plug 'desert256.vim'
 "Plug 'durgaswaroop/vim-lunarized'
-Plug 'vim-scripts/ibmedit.vim'
 Plug 'itchyny/landscape.vim'
-Plug 'joedicastro/vim-github256'
+Plug 'itchyny/lightline.vim'
 Plug 'jnurmine/zenburn'
+Plug 'joedicastro/vim-github256'
 Plug 'john2x/flatui.vim'
 "Plug 'junegunn/seoul256.vim'
 Plug 'marcopaganini/termschool-vim-theme'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
-Plug 'vim-scripts/peaksea'
-Plug 'vim-scripts/primary.vim'
 Plug 'pkukulak/idle'
 "Plug 'rainux/vim-desert-warm-256'
 Plug 'reewr/vim-monokai-phoenix'
 "Plug 'Siphalor/vim-atomified'
 Plug 'tomasr/molokai'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/Gentooish-II'
+Plug 'vim-scripts/ibmedit.vim'
 Plug 'vim-scripts/icansee.vim'
-Plug 'w0ng/vim-hybrid'
+Plug 'vim-scripts/peaksea'
+Plug 'vim-scripts/primary.vim'
 Plug 'vim-scripts/wombat256.vim'
+Plug 'w0ng/vim-hybrid'
 "
 " Syntax and file type
 Plug 'elzr/vim-json'
@@ -62,16 +59,17 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
 "
 " NerdTree
-Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
 "Plug 'vim-scripts/bufexplorer.zip'
 "
 " Misc
 Plug 'editorconfig/editorconfig-vim'
-Plug 'godlygeek/tabular'
 Plug 'edkolev/tmuxline.vim'
+Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " override the terminal colors and force 256 color mode
@@ -379,11 +377,11 @@ nmap <silent> <leader>g :GitGutterToggle<CR>
 " Poor-man's trailing white-space removal
 nmap <silent> <leader>s :%s/[ ]\+$//<CR>
 
-" Poor-man's sort
-nmap <silent> <leader>o :,$!sort -g<CR>
-
 " Show cursorcolumn
 nmap <silent> <leader>c :set cursorcolumn!<CR>
+
+" Disable Yggdroot/indentline
+nmap <silent> <leader>i :IndentLinesToggle<cr>
 
 
 " :h g:lightline.colorscheme
