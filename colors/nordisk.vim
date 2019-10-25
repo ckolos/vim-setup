@@ -1,223 +1,208 @@
 " ----------------------------------------------------------------- "
-"  " namenordisk"
-"  " descriptionA colour scheme closely modelled on"
-"  "schemeArctic Ice Studio’s Nord palette"
-"  "schemehttps://github.com/arcticicestudio/nord"
-"  " authorkamil.stachowski@gmail.com"
-"  " version0.5 (2016.12.06)Ice"
-"  " licenseGPLv3+palette"
-"  " ----------------------------------------------------------------- "
-"
-"  " - preamble
-"  ----------------------------------------------------------------------------------
-"  <<< -
-"
-"  let colors_name = "nordisk"
-"  set background=dark
-"
-"  if version > 580
-"  hi clear
-"  if exists("syntax_on")
-"  descriptionAsyntax reset
-"  endif
-"  endif
-"  if version > 800
-"  set termguicolors
-"  endif
-"
-"  function! s:hi(group, fg, bg, gui)
-"  let l:res = "hi " . a:group
-"  if a:fg != ""
-descriptionAlet l:res = l:res . " guifg=" . a:fg
-endifif a:bg != ""
-descriptionAlet l:res = l:res . " guibg=" . a:bg
-endifif a:gui != ""
-descriptionAlet l:res = l:res . " gui=" . a:gui
-descriptionAlet l:res = l:res . " cterm=". a:gui
-endifexecute l:res
+" name			nordisk                                                 "
+" description	A colour scheme closely modelled on                   "
+" Arctic Ice Studio’s Nord palette                                  "
+" https://github.com/arcticicestudio/nord                           "
+" author		kamil.stachowski@gmail.com                              "
+" version		0.5 (2016.12.06)                                        "
+" license		GPLv3+                                                  "
+" ----------------------------------------------------------------- "
+
+" - preamble ---------------------------------------------------------------------------------- <<< -
+
+let colors_name = "nordisk"
+set background=dark
+
+if version > 580
+	hi clear
+	if exists("syntax_on")
+		syntax reset
+	endif
+endif
+if version > 800
+	set termguicolors
+endif
+
+function! s:hi(group, fg, bg, gui)
+	let l:res = "hi " . a:group
+	if a:fg != ""
+		let l:res = l:res . " guifg=" . a:fg
+	endif
+	if a:bg != ""
+		let l:res = l:res . " guibg=" . a:bg
+	endif
+	if a:gui != ""
+		let l:res = l:res . " gui=" . a:gui
+		let l:res = l:res . " cterm=". a:gui
+	endif
+	execute l:res
 endfunction
 
-" ---------------------------------------------------------------------------------------------
-"  >>> -
-"  " - palette
-"  -----------------------------------------------------------------------------------
-"  <<< -
-"
-"  let s:col00 = "#252a33"descriptionA" blackish 1
-"  let s:col01 = "#38404d"descriptionA" blackish 2
-"  let s:col02 = "#4a5466"descriptionA" blackish 3
-"  let s:col03 = "#5e6b81"descriptionA" blackish 4
-"  let s:col04 = "#6f7e98"descriptionA" blackish 5
-"  let s:col05 = "#d7dbe2"descriptionA" whitish 1
-"  let s:col06 = "#ffffff"descriptionA" whitish 2
-"  let s:col07 = "#8fbcbb"descriptionA" light blue 1
-"  let s:col08 = "#81a1c1"descriptionA" light blue 3
-"  let s:col09 = "#88c0d0"descriptionA" light blue 2
-"  let s:col10 = "#5e81ac"descriptionA" light blue 4
-"  let s:col11 = "#a3be8c"descriptionA" green
-"  let s:col12 = "#b48ead"descriptionA" purple
-"  let s:col13 = "#eccf95"descriptionA" yellow
-"  let s:col14 = "#d18a75"descriptionA" orange
-"  let s:col15 = "#bf6971"descriptionA" red
-"
-"  "
-"  ---------------------------------------------------------------------------------------------
-"  >>> -
-"  " - originals
-"  ---------------------------------------------------------------------------------
-"  <<< -
-"
-"  call s:hi ("CursorLine","",colours:col01,"none")
-call s:hi ("Ignore",descriptionAs:col02,s:col00,"none")
-call s:hi ("Visual",descriptionAs:col00,s:col03,"none")
-call s:hi ("Comment",descriptionAs:col04,s:col00,"none")
+" --------------------------------------------------------------------------------------------- >>> -
+" - palette ----------------------------------------------------------------------------------- <<< -
 
-call s:hi ("Normal",descriptionAs:col05,s:col00,"none")
-call s:hi ("Special",descriptionAs:col06,s:col00,"none")
+let s:col00 = "#252a33"		" blackish 1
+let s:col01 = "#38404d"		" blackish 2
+let s:col02 = "#4a5466"		" blackish 3
+let s:col03 = "#5e6b81"		" blackish 4
+let s:col04 = "#6f7e98"		" blackish 5
+let s:col05 = "#d7dbe2"		" whitish 1
+let s:col06 = "#ffffff"		" whitish 2
+let s:col07 = "#8fbcbb"		" light blue 1
+let s:col08 = "#81a1c1"		" light blue 3
+let s:col09 = "#88c0d0"		" light blue 2
+let s:col10 = "#5e81ac"		" light blue 4
+let s:col11 = "#a3be8c"		" green
+let s:col12 = "#b48ead"		" purple
+let s:col13 = "#eccf95"		" yellow
+let s:col14 = "#d18a75"		" orange
+let s:col15 = "#bf6971"		" red
 
-call s:hi ("Operator",descriptionAs:col07,s:col00,"none")
-call s:hi ("Identifier",s:col08,s:col00,"none")
-call s:hi ("PreProc",descriptionAs:col09,s:col00,"none")
-call s:hi ("Constant",descriptionAs:col10,s:col00,"none")
-call s:hi ("Statement",descriptionAs:col11,s:col00,"none")
-call s:hi ("Type",colours:col12,s:col00,"none")
+" --------------------------------------------------------------------------------------------- >>> -
+" - originals --------------------------------------------------------------------------------- <<< -
 
-call s:hi ("Cursor",descriptionA"",colour"",colour"inverse")
-call s:hi ("DiffAdd",descriptionAs:col11,s:col00,"none")
-call s:hi ("DiffChange",s:col13,s:col00,"none")
-call s:hi ("DiffDelete",s:col15,s:col00,"none")
-call s:hi ("Error",colours:col00,s:col15,"none")
-call s:hi ("ModeMsg",descriptionAs:col06,s:col00,"bold")
-call s:hi ("Pmenu",colours:col05,s:col01,"none")
-call s:hi ("Search",descriptionAs:col14,"bg",descriptionA"none")
-call s:hi ("StatusLine",s:col06,s:col10,"bold")
-call s:hi ("StatusLineNC",s:col00,s:col05,"none")
-call s:hi ("Todo",colours:col14,s:col00,"none")
-call s:hi ("Underlined",s:col05,s:col00,"underline")
-call s:hi ("WarningMsg",s:col13,s:col00,"none")
+call s:hi ("CursorLine",	"",			s:col01,	"none")
+call s:hi ("Ignore",		s:col02,	s:col00,	"none")
+call s:hi ("Visual",		s:col00,	s:col03,	"none")
+call s:hi ("Comment",		s:col04,	s:col00,	"none")
 
-" ---------------------------------------------------------------------------------------------
-"  >>> -
-"  " - linked
-"  ------------------------------------------------------------------------------------
-"  <<< -
-"
-"  hi! link BooleanConstant
-"  hi! link CharacterConstant
-"  hi! link ColorColumnCursorColumn
-"  hi! link ConcealSpecial
-"  hi! link ConditionalStatement
-"  hi! link CursorColumnCursorLine
-"  hi! link CursorIMCursor
-"  hi! link CursorLineNrCursorLine
-"  hi! link DebugSpecial
-"  hi! link DefinePreProc
-"  hi! link DelimiterSpecial
-"  hi! link DiffTextSpecial
-"  hi! link DirectoryType
-"  hi! link EndOfBufferIgnore
-"  hi! link ErrorMsgError
-"  hi! link ExceptionStatement
-"  hi! link FloatConstant
-"  hi! link FoldColumnNormal
-"  hi! link FoldedComment
-"  hi! link FunctionIdentifier
-"  hi! link IncSearchSearch
-"  hi! link IncludePreProc
-"  hi! link KeywordStatement
-"  hi! link LabelStatement
-"  hi! link LineNrIgnore
-"  hi! link MacroPreProc
-"  hi! link MatchParenSearch
-"  hi! link MoreMsgModeMsg
-"  hi! link NonTextIgnore
-"  hi! link NumberConstant
-"  hi! link PmenuSbarStatusLineNC
-"  hi! link PmenuSelVisual
-"  hi! link PmenuThumbStatusLine
-"  hi! link PreConditPreProc
-"  hi! link QuestionModeMsg
-"  hi! link RepeatStatement
-"  hi! link SignColumnFoldColumn
-"  hi! link SpecialCharSpecial
-"  hi! link SpecialCommentSpecial
-"  hi! link SpecialKeySpecial
-"  hi! link SpellBadError
-"  hi! link SpellCapError
-"  hi! link SpellLocalConstant
-"  hi! link SpellRareSpecial
-"  hi! link StorageClassType
-"  hi! link StringConstant
-"  hi! link StructureType
-"  hi! link TabLineStatusLineNC
-"  hi! link TabLineFillStatusLineNC
-"  hi! link TabLineSelStatusLine
-"  hi! link TagSpecial
-"  hi! link TitleStatement
-"  hi! link TypedefType
-"  hi! link VertSplitStatusLineNC
-"  hi! link VisualNOSVisual
-"  hi! link WildMenuStatusLineNC
-"
-"  "
-"  ---------------------------------------------------------------------------------------------
-"  >>> -
-"  " - languages
-"  ---------------------------------------------------------------------------------
-"  <<< -
-"
-"  " c++
-"  hi! link cppAccessType
-"  hi! link cppStatementSpecial
-"
-"  " html
-"  hi! link htmlArgStatement
-"  hi! link htmlTagOperator
-"  hi! link htmlTagNameType
-"  hi! link htmlTitleType
-"
-"  " java
-"  hi! link javaTypeDefSpecial
-"
-"  " markdown
-"  hi! link markdownH1Type
-"
-"  " nerdtree
-"  hi! link NERDTreeCWDWarningMsg
-"  hi! link NERDTreeExecFilePreProc
-"  hi! link NERDTreeLinkDirType
-"  hi! link NERDTreeLinkFileSpecial
-"  hi! link NERDTreeLinkTargetNormal
-"
-"  " netrw
-"  hi! link netrwSymLinkSpecial
-"
-"  " pascal
-"  hi! link pascalStatementType
-"
-"  " python
-"  hi! link pythonStatementType
-"
-"  " ruby
-"  hi! link rubyConstantSpecial
-"  hi! link rubyDefineType
-"
-"  " sh
-"  hi! link shDerefVarSpecial
-"  hi! link shFunctionType
-"  hi! link shLoopStatement
-"  hi! link shStatementSpecial
-"
-"  " vim
-"  hi! link vimCommandStatement
-"  hi! link vimEnvVarSpecial
-"  hi! link vimFuncKeyType
-"  hi! link vimOptionSpecial
-"  hi! link vimSyntaxSpecial
-"  hi! link vimSynTypeSpecial
-"
-"  "
-"  ---------------------------------------------------------------------------------------------
-"  >>> -
-"
-"  " vim: foldmarker=<<<,>>>
+call s:hi ("Normal",		s:col05,	s:col00,	"none")
+call s:hi ("Special",		s:col06,	s:col00,	"none")
+
+call s:hi ("Operator",		s:col07,	s:col00,	"none")
+call s:hi ("Identifier",	s:col08,	s:col00,	"none")
+call s:hi ("PreProc",		s:col09,	s:col00,	"none")
+call s:hi ("Constant",		s:col10,	s:col00,	"none")
+call s:hi ("Statement",		s:col11,	s:col00,	"none")
+call s:hi ("Type",			s:col12,	s:col00,	"none")
+
+call s:hi ("Cursor",		"",			"",			"inverse")
+call s:hi ("DiffAdd",		s:col11,	s:col00,	"none")
+call s:hi ("DiffChange",	s:col13,	s:col00,	"none")
+call s:hi ("DiffDelete",	s:col15,	s:col00,	"none")
+call s:hi ("Error",			s:col00,	s:col15,	"none")
+call s:hi ("ModeMsg",		s:col06,	s:col00,	"bold")
+call s:hi ("Pmenu",			s:col05,	s:col01,	"none")
+call s:hi ("Search",		s:col14,	"bg",		"none")
+call s:hi ("StatusLine",	s:col06,	s:col10,	"bold")
+call s:hi ("StatusLineNC",	s:col00,	s:col05,	"none")
+call s:hi ("Todo",			s:col14,	s:col00,	"none")
+call s:hi ("Underlined",	s:col05,	s:col00,	"underline")
+call s:hi ("WarningMsg",	s:col13,	s:col00,	"none")
+
+" --------------------------------------------------------------------------------------------- >>> -
+" - linked ------------------------------------------------------------------------------------ <<< -
+
+hi! link Boolean		Constant
+hi! link Character		Constant
+hi! link ColorColumn	CursorColumn
+hi! link Conceal		Special
+hi! link Conditional	Statement
+hi! link CursorColumn	CursorLine
+hi! link CursorIM		Cursor
+hi! link CursorLineNr	CursorLine
+hi! link Debug			Special
+hi! link Define			PreProc
+hi! link Delimiter		Special
+hi! link DiffText		Special
+hi! link Directory		Type
+hi! link EndOfBuffer	Ignore
+hi! link ErrorMsg		Error
+hi! link Exception		Statement
+hi! link Float			Constant
+hi! link FoldColumn		Normal
+hi! link Folded			Comment
+hi! link Function		Identifier
+hi! link IncSearch		Search
+hi! link Include		PreProc
+hi! link Keyword		Statement
+hi! link Label			Statement
+hi! link LineNr			Ignore
+hi! link Macro			PreProc
+hi! link MatchParen		Search
+hi! link MoreMsg		ModeMsg
+hi! link NonText		Ignore
+hi! link Number			Constant
+hi! link PmenuSbar		StatusLineNC
+hi! link PmenuSel		Visual
+hi! link PmenuThumb		StatusLine
+hi! link PreCondit		PreProc
+hi! link Question		ModeMsg
+hi! link Repeat			Statement
+hi! link SignColumn		FoldColumn
+hi! link SpecialChar	Special
+hi! link SpecialComment	Special
+hi! link SpecialKey		Special
+hi! link SpellBad		Error
+hi! link SpellCap		Error
+hi! link SpellLocal		Constant
+hi! link SpellRare		Special
+hi! link StorageClass	Type
+hi! link String			Constant
+hi! link Structure		Type
+hi! link TabLine		StatusLineNC
+hi! link TabLineFill	StatusLineNC
+hi! link TabLineSel		StatusLine
+hi! link Tag			Special
+hi! link Title			Statement
+hi! link Typedef		Type
+hi! link VertSplit		StatusLineNC
+hi! link VisualNOS		Visual
+hi! link WildMenu		StatusLineNC
+
+" --------------------------------------------------------------------------------------------- >>> -
+" - languages --------------------------------------------------------------------------------- <<< -
+
+" c++
+hi! link cppAccess		Type
+hi! link cppStatement	Special
+
+" html
+hi! link htmlArg		Statement
+hi! link htmlTag		Operator
+hi! link htmlTagName	Type
+hi! link htmlTitle		Type
+
+" java
+hi! link javaTypeDef	Special
+
+" markdown
+hi! link markdownH1		Type
+
+" nerdtree
+hi! link NERDTreeCWD	WarningMsg
+hi! link NERDTreeExecFile	PreProc
+hi! link NERDTreeLinkDir	Type
+hi! link NERDTreeLinkFile	Special
+hi! link NERDTreeLinkTarget	Normal
+
+" netrw
+hi! link netrwSymLink	Special
+
+" pascal
+hi! link pascalStatement	Type
+
+" python
+hi! link pythonStatement	Type
+
+" ruby
+hi! link rubyConstant	Special
+hi! link rubyDefine		Type
+
+" sh
+hi! link shDerefVar		Special
+hi! link shFunction		Type
+hi! link shLoop			Statement
+hi! link shStatement	Special
+
+" vim
+hi! link vimCommand		Statement
+hi! link vimEnvVar		Special
+hi! link vimFuncKey		Type
+hi! link vimOption		Special
+hi! link vimSyntax		Special
+hi! link vimSynType		Special
+
+" --------------------------------------------------------------------------------------------- >>> -
+
+" vim: foldmarker=<<<,>>>
