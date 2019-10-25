@@ -10,6 +10,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " Look and Feel
 "Plug 'altercation/vim-colors-solarized'
+Plug 'arcticicestudio/nord-vim'
 Plug 'antlypls/vim-colors-codeschool'
 "Plug 'baverman/vim-babymate256'
 Plug 'bruschill/madeofcode'
@@ -17,22 +18,32 @@ Plug 'bruschill/madeofcode'
 "Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ciaranm/inkpot'
+Plug 'danilo-augusto/vim-afterglow'
+Plug 'davidklsn/vim-sialoquent'
 "Plug 'desert256.vim'
 "Plug 'durgaswaroop/vim-lunarized'
+Plug 'flrnprz/candid.vim'
+Plug 'flrnprz/plastic.vim'
 Plug 'itchyny/landscape.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jnurmine/zenburn'
 Plug 'joedicastro/vim-github256'
 Plug 'john2x/flatui.vim'
 "Plug 'junegunn/seoul256.vim'
+Plug 'lmintmate/blue-mood-vim'
 Plug 'marcopaganini/termschool-vim-theme'
+Plug 'MvanDiemen/brighton.vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'pkukulak/idle'
 "Plug 'rainux/vim-desert-warm-256'
 Plug 'reewr/vim-monokai-phoenix'
+Plug 'rhysd/vim-color-spring-night'
 "Plug 'Siphalor/vim-atomified'
+Plug 'sainnhe/edge'
+Plug 'sainnhe/gruvbox-material'
 Plug 'tomasr/molokai'
+Plug 'tyrannicaltoucan/vim-deep-space'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/Gentooish-II'
@@ -42,18 +53,19 @@ Plug 'vim-scripts/peaksea'
 Plug 'vim-scripts/primary.vim'
 Plug 'vim-scripts/wombat256.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'zacanger/angr.vim'
 "
 " Syntax and file type
-Plug 'elzr/vim-json'
+" Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
-Plug 'puppetlabs/puppet-syntax-vim'
+" Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'tpope/vim-markdown'
 Plug 'vim-scripts/gnupg.vim'
 Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
 "
 " Git Shit
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
@@ -137,6 +149,9 @@ set modelines=3
 " Don't create backups when overwriting a file
 set nobackup
 
+" If we're using lightline (which we are), don't showmode
+set noshowmode
+
 " Don't use a swap file
 set noswapfile
 
@@ -209,7 +224,6 @@ if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 else
   set background=dark
-  let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
 endif
 
 " Some abbreviations
@@ -300,10 +314,17 @@ let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '--'
 
 " TF Files in a different color
-autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
+" autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
+autocmd BufEnter *.tf* colorscheme plastic
 
 " terraform fmt 
 let g:terraform_fmt_on_save=1
+
+" Afterglow colorscheme settings
+let g:afterglow_blackout=1
+let g:afterglow_italic_comments=1
+" If you need this, don't use blackout above
+"let g:afterglow_inherit_background=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
@@ -336,7 +357,7 @@ nnoremap <C-l> <C-w>l
 " From http://blog.sanctum.geek.nz/lazier-tab-completion/
 " Ignore case in file name completion
 if exists("&wildignorecase")
-set wildignorecase
+  set wildignorecase
 endif
 
 " From http://bitbucket.org/sjl/dotfiles/overview
@@ -362,39 +383,42 @@ set wildignore+=*.orig " Merge resolution files
 "  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
 """ End Hidden Chars
 
-" ----- jistr/vim-nerdtree-tabs -----
-" Open/close NERDTree Tabs with <leader>t
-"
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 
 " To have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
 
-" Disable/Enable ALE with leader d/e
-nmap <silent> <leader>d :ALEToggle<CR>
-nmap <silent> <leader>g :GitGutterToggle<CR>
-
-" Poor-man's trailing white-space removal
-nmap <silent> <leader>s :%s/[ ]\+$//<CR>
-
-" Show cursorcolumn
+" Disable/Enable ALE with leader a
+nmap <silent> <leader>a :ALEToggle<CR>
+" Show cursorcolumn with leader c
 nmap <silent> <leader>c :set cursorcolumn!<CR>
-
-" Disable Yggdroot/indentline
+" Toggle GitGutter with leader g
+nmap <silent> <leader>g :GitGutterToggle<CR>
+" Toggle IndentLines with leader i
 nmap <silent> <leader>i :IndentLinesToggle<cr>
+" Poor-man's trailing white-space removal leader s
+nmap <silent> <leader>s :%s/[ ]\+$//<CR>
+" Open/close NERDTree Tabs with leader t
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 
-
-" :h g:lightline.colorscheme
 let g:lightline = {
-      \ 'colorscheme': 'OldHope',
+      \ 'colorscheme': 'deepspace',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \   'left':  [ [ 'mode', 'paste', 'filename', 'gitbranch' ],
+      \              [ ' ', 'lineinfo', 'percent' ],
+      \            ],
+      \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
+      \              [ 'modified', 'readonly' ],
+      \            ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
+      \   'gitbranch': 'fugitive#head',
+      \   'fullfilename': 'FullFilename',
       \ },
       \ }
+" FullFilename function for lightline
+function! FullFilename()
+  return expand('%:p')
+endfunction
 
 " Rename tabs to show tab number.
 " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
@@ -442,16 +466,15 @@ if exists("+showtabline")
     highlight link TabNum Special
 endif
 
+" Tmuxline config
 let g:tmuxline_separators = {
     \ 'left' : '',
     \ 'left_alt': '>',
     \ 'right' : '',
     \ 'right_alt' : '<',
     \ 'space' : ' '}
-"
-" FZF Stuff
-"
 
+" FZF Stuff
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
