@@ -62,7 +62,6 @@ Plug 'zacanger/angr.vim'
 " Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
 " Plug 'puppetlabs/puppet-syntax-vim'
-Plug 'tpope/vim-markdown'
 Plug 'vim-scripts/gnupg.vim'
 Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
@@ -554,3 +553,6 @@ nnoremap <silent> <Leader>Fb :Blines<CR>
 nnoremap <silent> <Leader>FH :History<CR>
 nnoremap <silent> <Leader>Fh :History:<CR>
 nnoremap <silent> <Leader>Fc :Commands<CR>
+
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_conceal = 0
