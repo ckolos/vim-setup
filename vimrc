@@ -282,9 +282,6 @@ au BufRead,BufNewFile *.json
 au BufRead,BufNewFile *.pp
     \ set filetype=puppet
 
-au BufRead,BufNewFile *_spec.rb
-    \ nmap <F8> :!rspec --color %<CR>
-
 " found this stuff on http://www.terminally-incoherent.com
 " toggle paste setting on insert with F2
 nnoremap <F2> :set invpaste paste?<CR>
@@ -308,13 +305,11 @@ let g:vim_json_syntax_conceal = 0
 " let g:syntastic_python_flake8_args="--ignore=E401,E501,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
 
 " w0pr/ale tweaks - https://github.com/w0rp/ale
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_error_str = 'Err'
+let g:ale_echo_msg_warning_str = 'Warn'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-" let g:ale_statusline_format = ['XX %d', '!! %d', '⬥ ok']
-let g:ale_sign_error = '!!'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = 'E!'
+let g:ale_sign_warning = 'W.'
 
 " TF Files in a different color
 " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
