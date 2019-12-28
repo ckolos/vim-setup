@@ -22,9 +22,12 @@ Plug 'danilo-augusto/vim-afterglow'
 Plug 'davidklsn/vim-sialoquent'
 "Plug 'desert256.vim'
 Plug 'doums/darcula'
+Plug 'drewtempelmeyer/palenight.vim'
 "Plug 'durgaswaroop/vim-lunarized'
 Plug 'flrnprz/candid.vim'
 Plug 'flrnprz/plastic.vim'
+Plug 'Gabirel/molokai'
+Plug 'icymind/NeoSolarized'
 Plug 'itchyny/landscape.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jnurmine/zenburn'
@@ -32,20 +35,24 @@ Plug 'joedicastro/vim-github256'
 Plug 'john2x/flatui.vim'
 "Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'KabbAmine/yowish.vim'
 Plug 'lmintmate/blue-mood-vim'
 Plug 'marcopaganini/termschool-vim-theme'
 Plug 'MvanDiemen/brighton.vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'pkukulak/idle'
 "Plug 'rainux/vim-desert-warm-256'
+Plug 'rakr/vim-one'
 Plug 'reewr/vim-monokai-phoenix'
 Plug 'rhysd/vim-color-spring-night'
 Plug 'ryanoasis/vim-devicons'
 "Plug 'Siphalor/vim-atomified'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/gruvbox-material'
-Plug 'tomasr/molokai'
+Plug 'SpaceVim/vim-material'
+" Plug 'tomasr/molokai'
 Plug 'tyrannicaltoucan/vim-deep-space'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
@@ -57,7 +64,7 @@ Plug 'vim-scripts/primary.vim'
 Plug 'vim-scripts/wombat256.vim'
 Plug 'w0ng/vim-hybrid'
 Plug 'zacanger/angr.vim'
-"
+
 " Syntax and file type
 " Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
@@ -315,7 +322,7 @@ let g:ale_sign_warning = 'W.'
 " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
 autocmd BufEnter *.tf* colorscheme plastic
 
-" terraform fmt 
+" terraform fmt
 let g:terraform_fmt_on_save=1
 
 " Afterglow colorscheme settings
