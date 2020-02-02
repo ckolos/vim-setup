@@ -1,3 +1,4 @@
+
 " Use vim mode, not vi-compatible
 set nocompatible
 filetype off
@@ -127,6 +128,16 @@ let g:netrw_dirhistmax = 0
 " allow backspace to remove indent,eol, and start of doc
 set backspace=2
 
+" Completion behaviour
+set completeopt+=menuone  " Show menu even if there is only one item
+set completeopt-=preview  " Disable the preview window
+
+" Settings for popup menu
+set pumheight=15  " Maximum number of items to show in popup menu
+if exists("&pumblend")
+    set pumblend=5  " Pesudo blend effect for popup menu
+endif
+
 " Copy the structure of the existing lines indent when autoindenting a new line
 set copyindent
 
@@ -139,8 +150,14 @@ set cursorline
 " Expand tabs into spaces; I dislike tabs. If I need one, CTRL-V <TAB>
 set expandtab
 
+" Changing fillchars for folding, so there is no garbage charactes
+set fillchars=fold:\ ,vert:\|
+
+" The level we start to fold
+set foldlevel=0
+
 " Use smartcase for searching
-set smartcase
+set ignorecase smartcase
 
 " Incremental search = on
 set incsearch
@@ -168,17 +185,25 @@ set noswapfile
 " no, really, don't make a backup of a file; even when writing over it.
 set nowb
 
-" turn on line-numbering
-set number
+" turn on line-numbering and relative line number
+set number relativenumber
 
 " always tell me how many lines were changed when running s/g/ etc.
 set report=0
 
-" show me the current relative position in the file in my status line
-set ruler
+" Minimum lines to keep above and below cursor when scrolling
+set scrolloff=3
 
+" show me the current relative position in the file in my status line
+"set ruler
+
+"Align indent to next multiple value of shiftwidth. For its meaning,
+" see http://tinyurl.com/y5n87a6m
+set shiftround
+"
 " Number of spaces to use for each auto-indent
 set shiftwidth=2
+
 
 " Show the partial command being run at the bottom of the screen
 set showcmd
@@ -197,8 +222,8 @@ set showmatch
 " can be overridden by the filetype
 set softtabstop=2
 
-" when splitting, set the new window under the current window
-set splitbelow
+" Split window below/right when creating horizontal/vertical windows
+set splitbelow splitright
 
 " Always show the tabline
 set showtabline=2
@@ -208,7 +233,17 @@ set tabstop=2
 
 " change the title of the current terminal to the current edited file when
 " editing
+"set title
+
+" Show hostname, full path of file and last-mod time on the window title.
+" The meaning of the format str for strftime can be found in
+" http://tinyurl.com/l9nuj4a. The function to get lastmod time is drawn from
+" http://tinyurl.com/yxd23vo8
 set title
+set titlestring=
+set titlestring+=%(%{hostname()}\ \ %)
+set titlestring+=%(%{expand('%:p')}\ \ %)
+set titlestring+=%{strftime('%Y-%m-%d\ %H:%M',getftime(expand('%')))}
 
 " Flash the screen, no beep.
 set visualbell
@@ -272,7 +307,6 @@ if has("unix")
     inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
     inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
     inoremap <expr> <M-,> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
 else
     set complete=.,i,w,b,u,t
 endif
@@ -297,6 +331,20 @@ set pastetoggle=<F2>
 " Turn line-numbers off/on with F5/6
 noremap <F5> <ESC>:set nonumber<CR>
 noremap <F6> <ESC>:set number<CR>
+
+" Yank from current cursor position to the end of the line (make it
+" consistent with the behavior of D, C)
+nnoremap Y y$
+
+" Reselect the text that has just been pasted
+nnoremap <leader>v `[V`]
+
+" Find and replace (like Sublime Text 3)
+nnoremap <C-H> :%s/
+xnoremap <C-H> :s/
+
+" Decrease indent level in insert mode with shift+tab
+inoremap <S-Tab> <ESC><<i
 
 " JSON Filetype setting - needed for the json vundle
 let g:vim_json_syntax_conceal = 0
@@ -365,6 +413,11 @@ if exists("&wildignorecase")
   set wildignorecase
 endif
 
+" The way to show the result of substitution in real time for preview
+if exists("&inccommand")
+  set inccommand=nosplit
+endif
+
 " From http://bitbucket.org/sjl/dotfiles/overview
 set wildignore+=.hg,.git,.svn " Version control
 set wildignore+=*.aux,*.out,*.toc " LaTeX intermediate files
@@ -393,17 +446,17 @@ set wildignore+=*.orig " Merge resolution files
 " let g:nerdtree_tabs_open_on_console_startup = 1
 
 " Disable/Enable ALE with leader a
-nmap <silent> <leader>a :ALEToggle<CR>
+nmap <silent> <Leader>a :ALEToggle<CR>
 " Show cursorcolumn with leader c
-nmap <silent> <leader>c :set cursorcolumn!<CR>
+nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Toggle GitGutter with leader g
-nmap <silent> <leader>g :GitGutterToggle<CR>
+nmap <silent> <Leader>g :GitGutterToggle<CR>
 " Toggle IndentLines with leader i
-nmap <silent> <leader>i :IndentLinesToggle<cr>
+nmap <silent> <Leader>i :IndentLinesToggle<cr>
 " Poor-man's trailing white-space removal leader s
-nmap <silent> <leader>s :%s/[ ]\+$//<CR>
+nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 " Open/close NERDTree Tabs with leader t
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nmap <silent> <Leader>t :NERDTreeTabsToggle<CR>
 
 let g:lightline = {
       \ 'colorscheme': 'deepspace',
@@ -424,6 +477,18 @@ let g:lightline = {
 function! FullFilename()
   return expand('%:p')
 endfunction
+
+"{ Auto commands
+" Do not use smart case in command line mode,
+" extracted from https://goo.gl/vCTYdK
+if exists("##CmdLineEnter")
+    augroup dynamic_smartcase
+        autocmd!
+        autocmd CmdLineEnter : set nosmartcase
+        autocmd CmdLineLeave : set smartcase
+    augroup END
+endif
+
 
 " Rename tabs to show tab number.
 " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
