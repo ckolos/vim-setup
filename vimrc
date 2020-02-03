@@ -457,6 +457,8 @@ nmap <silent> <Leader>i :IndentLinesToggle<cr>
 nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 " Open/close NERDTree Tabs with leader t
 nmap <silent> <Leader>t :NERDTreeTabsToggle<CR>
+" Use leader-f to call :FZFNeigh
+nmap <silent> <Leader>f :FZFNeigh<CR>
 
 let g:lightline = {
       \ 'colorscheme': 'deepspace',
