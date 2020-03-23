@@ -519,34 +519,25 @@ set wildignore+=migrations " Django migrations
 set wildignore+=*.pyc " Python byte code
 set wildignore+=*.orig " Merge resolution files
 
-" Show Hidden Chars
-" I love/hate these. Be careful: when you turn them on, they show up in
-" cut/paste operations.
-"
-" set list " Shows certain hidden chars
-" set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
-"  hi NonText term=reverse term=bold ctermfg=lightgrey" Makes Trailing brightred
-"  hi SpecialKey ctermfg=lightgrey " Makes Leading darkgray
-""" End Hidden Chars
-
-
-" To have NERDTree always open on startup
 " let g:nerdtree_tabs_open_on_console_startup = 1
-
 " Disable/Enable ALE with leader a
-nmap <silent> <Leader>a :ALEToggle<CR>
+" nmap <silent> <Leader>a :ALEToggle<CR>
+" Show cursorcolumn with leader c
+" nmap <silent> <Leader>c :set cursorcolumn!<CR>
+" Toggle GitGutter with leader g
+" nmap <silent> <Leader>g :GitGutterToggle<CR>
+" Toggle IndentLines with leader i
+" nmap <silent> <Leader>i :IndentLinesToggle<cr>
 " Show cursorcolumn with leader c
 nmap <silent> <Leader>c :set cursorcolumn!<CR>
-" Toggle GitGutter with leader g
-nmap <silent> <Leader>g :GitGutterToggle<CR>
-" Toggle IndentLines with leader i
-nmap <silent> <Leader>i :IndentLinesToggle<cr>
+" Use leader-f to call :FZFNeigh
+nmap <silent> <Leader><C-f> :FZFNeigh<CR>
+" Use leader-h to toggle hidden chars
+nmap <silent> <Leader>h :call HiddenToggle()<CR>
 " Poor-man's trailing white-space removal leader s
 nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 " Open/close NERDTree Tabs with leader t
 nmap <silent> <Leader>t :NERDTreeTabsToggle<CR>
-" Use leader-f to call :FZFNeigh
-nmap <silent> <Leader>f :FZFNeigh<CR>
 
 let g:lightline = {
       \ 'colorscheme': 'deepspace',
@@ -713,32 +704,59 @@ nnoremap <silent> <Leader>Fc :Commands<CR>
 
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_conceal = 0
+
 nnoremap <silent> <Leader>gc :call GutterClean()<CR>
 nnoremap <silent> <Leader>gu :call Gutter()<CR>
 nnoremap <silent> <Leader>gt :call GutterToggle()<CR>
+
+let g:guttercleaned = 0
+
 function! GutterClean() abort
-     :ALEDisable
-     :GitGutterDisable
-     :IndentLinesDisable
-     set norelativenumber
-     set nonumber
-     let g:guttercleaned = 1
+  let g:guttercleaned = 1
+  :ALEDisable
+  :GitGutterDisable
+  :IndentLinesDisable
+  set norelativenumber
+  set nonumber
 endfunction
 
 function! Gutter() abort
-     :ALEEnable
-     :GitGutterEnable
-     :IndentLinesEnable
-     set relativenumber
-     set number
-     let g:noguttercleaned = 0
+  let g:noguttercleaned = 0
+  :ALEEnable
+  :GitGutterEnable
+  :IndentLinesEnable
+  set relativenumber
+  set number
 endfunction
 
 function GutterToggle() abort
   if g:guttercleaned
-    call Gutter()
+     call Gutter()
   else
-    call GutterClean()
+     call GutterClean()
   endif
 endfunction
 
+let hiddens_are_shown = 0
+function! ShowHidden() abort
+  set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
+  " Makes Trailing lightgrey
+  hi NonText term=reverse term=bold ctermfg=lightgrey 
+  " Makes Leading spaces lightgrey
+  hi SpecialKey ctermfg=lightgrey
+  set list
+  let g:hiddens_are_shown = 1
+endfunction
+
+function! HideHidden() abort
+  set nolist
+  let g:hiddens_are_shown = 0
+endfunction
+
+function! HiddenToggle() abort
+    if g:hiddens_are_shown
+      call HideHidden()
+    else
+      call ShowHidden()
+    endif
+endfunction
