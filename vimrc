@@ -76,6 +76,7 @@ Plug 'sheerun/vim-polyglot'
 "
 " Git Shit
 Plug 'airblade/vim-gitgutter'
+Plug 'cohama/agit.vim'              " :Agit
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -87,10 +88,74 @@ Plug 'scrooloose/nerdtree'
 "Plug 'vim-scripts/bufexplorer.zip'
 "
 " Misc
+Plug 'chrisbra/NrrwRgn'
+" :NR  - Open the selected region in a new narrowed window
+":NW  - Open the current visual window in a new narrowed window
+":WR  - (In the narrowed window) write the changes back to the original buffer.
+":NRV - Open the narrowed window for the region that was last visually selected.
+":NUD - (In a unified diff) open the selected diff in 2 Narrowed windows
+":NRP - Mark a region for a Multi narrowed window
+":NRM - Create a new Multi narrowed window (after :NRP) - experimental!
+":NRS - Enable Syncing the buffer content back (default on)
+":NRN - Disable Syncing the buffer content back
+":NRL - Reselect the last selected region and open it again in a narrowed window
+"
+Plug 'ctrlpvim/ctrlp.vim'
+" Basic Usage
+"
+"    Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
+"    Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
+"    Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
+"
+"Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
+"Once CtrlP is open:
+"
+"    Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+"    Press <c-f> and <c-b> to cycle between modes.
+"    Press <c-d> to switch to filename only search instead of full path.
+"    Press <c-r> to switch to regexp mode.
+"    Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+"    Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+"    Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+"    Use <c-y> to create a new file and its parent directories.
+"    Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+"
+"Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
+"
+"    Submit two or more dots .. to go up the directory tree by one or multiple levels.
+"    End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
+Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymotion
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
+":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
+":GFiles [OPTS] 	Git files (git ls-files)
+":GFiles? 	Git files (git status)
+":Buffers 	Open buffers
+":Colors 	Color schemes
+":Ag [PATTERN] 	ag search result (ALT-A to select all, ALT-D to deselect all)
+":Rg [PATTERN] 	rg search result (ALT-A to select all, ALT-D to deselect all)
+":Lines [QUERY] 	Lines in loaded buffers
+":BLines [QUERY] 	Lines in the current buffer
+":Tags [QUERY] 	Tags in the project (ctags -R)
+":BTags [QUERY] 	Tags in the current buffer
+":Marks 	Marks
+":Windows 	Windows
+":Locate PATTERN 	locate command output
+":History 	v:oldfiles and open buffers
+":History: 	Command history
+":History/ 	Search history
+":Snippets 	Snippets (UltiSnips)
+":Commits 	Git commits (requires fugitive.vim)
+":BCommits 	Git commits for the current buffer
+":Commands 	Commands
+":Maps 	Normal mode mappings
+":Helptags 	Help tags 1
+":Filetypes 	File types
+"
+Plug 'mhinz/vim-startify'
+Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
 " Plug 'tpope/vim-vinegar'
 Plug 'Yggdroot/indentLine'
 call plug#end()
@@ -343,6 +408,29 @@ nnoremap <leader>v `[V`]
 nnoremap <C-H> :%s/
 xnoremap <C-H> :s/
 
+" Easymotion maps
+"
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+" s{char}{char} to move to {char}{char}
+nmap <Leader>S <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+let g:EasyMotion_smartcase = 1
+
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
 
@@ -401,11 +489,11 @@ autocmd InsertLeave *
     \     set nopaste |
     \ endif
 
-" Use ctrl+{hjkl} to navigate windows
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+" Use Esc+Arrow Keys to navigate windows
+nnoremap <Down> <C-w>j
+nnoremap <Up> <C-w>k
+nnoremap <Left> <C-w>h
+nnoremap <Right> <C-w>l
 
 " From http://blog.sanctum.geek.nz/lazier-tab-completion/
 " Ignore case in file name completion
@@ -625,3 +713,32 @@ nnoremap <silent> <Leader>Fc :Commands<CR>
 
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_conceal = 0
+nnoremap <silent> <Leader>gc :call GutterClean()<CR>
+nnoremap <silent> <Leader>gu :call Gutter()<CR>
+nnoremap <silent> <Leader>gt :call GutterToggle()<CR>
+function! GutterClean() abort
+     :ALEDisable
+     :GitGutterDisable
+     :IndentLinesDisable
+     set norelativenumber
+     set nonumber
+     let g:guttercleaned = 1
+endfunction
+
+function! Gutter() abort
+     :ALEEnable
+     :GitGutterEnable
+     :IndentLinesEnable
+     set relativenumber
+     set number
+     let g:noguttercleaned = 0
+endfunction
+
+function GutterToggle() abort
+  if g:guttercleaned
+    call Gutter()
+  else
+    call GutterClean()
+  endif
+endfunction
+
