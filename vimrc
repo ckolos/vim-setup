@@ -10,64 +10,34 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 call plug#begin('~/.vim/plugged')
 " Look and Feel
-"Plug 'altercation/vim-colors-solarized'
 Plug 'arcticicestudio/nord-vim'
 Plug 'antlypls/vim-colors-codeschool'
-"Plug 'baverman/vim-babymate256'
-Plug 'bruschill/madeofcode'
-"Plug 'cdaddr/gentooish.vim'
-"Plug 'chriskempson/base16-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
-Plug 'ciaranm/inkpot'
 Plug 'danilo-augusto/vim-afterglow'
-Plug 'davidklsn/vim-sialoquent'
-"Plug 'desert256.vim'
 Plug 'doums/darcula'
-Plug 'drewtempelmeyer/palenight.vim'
-"Plug 'durgaswaroop/vim-lunarized'
-Plug 'flrnprz/candid.vim'
-Plug 'flrnprz/plastic.vim'
 Plug 'Gabirel/molokai'
 Plug 'icymind/NeoSolarized'
-Plug 'itchyny/landscape.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'jnurmine/zenburn'
 Plug 'joedicastro/vim-github256'
 Plug 'john2x/flatui.vim'
-"Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'KabbAmine/yowish.vim'
 Plug 'lmintmate/blue-mood-vim'
-Plug 'marcopaganini/termschool-vim-theme'
-Plug 'MvanDiemen/brighton.vim'
-Plug 'nanotech/jellybeans.vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'pkukulak/idle'
-"Plug 'rainux/vim-desert-warm-256'
 Plug 'rakr/vim-one'
-Plug 'reewr/vim-monokai-phoenix'
-Plug 'rhysd/vim-color-spring-night'
-Plug 'ryanoasis/vim-devicons'
-"Plug 'Siphalor/vim-atomified'
-Plug 'sainnhe/edge'
-Plug 'sainnhe/gruvbox-material'
 Plug 'SpaceVim/vim-material'
-" Plug 'tomasr/molokai'
 Plug 'tyrannicaltoucan/vim-deep-space'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-scripts/Gentooish-II'
 Plug 'vim-scripts/ibmedit.vim'
-Plug 'vim-scripts/icansee.vim'
-Plug 'vim-scripts/peaksea'
-Plug 'vim-scripts/primary.vim'
 Plug 'vim-scripts/wombat256.vim'
 Plug 'w0ng/vim-hybrid'
-Plug 'zacanger/angr.vim'
+
+" Status line
+Plug 'itchyny/lightline.vim'
+
+" NERDTree icons
 
 " Syntax and file type
-" Plug 'elzr/vim-json'
+Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
 " Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'vim-scripts/gnupg.vim'
@@ -84,6 +54,7 @@ Plug 'tpope/vim-rhubarb'
 "
 " NerdTree
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 "Plug 'vim-scripts/bufexplorer.zip'
 "
@@ -154,6 +125,7 @@ Plug 'junegunn/fzf.vim'
 ":Helptags 	Help tags 1
 ":Filetypes 	File types
 "
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
 " Plug 'tpope/vim-vinegar'
