@@ -299,9 +299,10 @@ set wildmode=list:longest,full
 set wrapscan
 
 " Check to see if we're using OSX by looking for sw_vers
-if strlen(system("/usr/bin/which sw_vers > /dev/null 2>&1; echo $?")) == 17
+if strlen(system("/usr/bin/which sw_vers")) == 17
   set background=light
   colorscheme github256
+  set rtp+=/usr/local/opt/fzf
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 else
@@ -428,7 +429,7 @@ let g:ale_sign_warning = 'W.'
 
 " TF Files in a different color
 " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
-autocmd BufEnter *.tf* colorscheme plastic
+autocmd BufEnter *.tf* colorscheme Tomorrow-Night
 
 " terraform fmt
 let g:terraform_fmt_on_save=1
