@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim'
 Plug 'antlypls/vim-colors-codeschool'
 Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'ckolos/blue-mood-vim'
 Plug 'danilo-augusto/vim-afterglow'
 Plug 'doums/darcula'
 Plug 'Gabirel/molokai'
@@ -20,7 +21,6 @@ Plug 'icymind/NeoSolarized'
 Plug 'jnurmine/zenburn'
 Plug 'joedicastro/vim-github256'
 Plug 'john2x/flatui.vim'
-Plug 'lmintmate/blue-mood-vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'pkukulak/idle'
@@ -127,9 +127,10 @@ Plug 'junegunn/fzf.vim'
 "
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
 " Plug 'tpope/vim-vinegar'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " override the terminal colors and force 256 color mode
@@ -414,12 +415,6 @@ let g:vim_json_syntax_conceal = 0
 " let g:airline_theme="luna"
 " let g:airline_powerline_fonts = 1
 
-" Syntastic configs
-" let g:syntastic_puppet_puppetlint_args = "--no-80chars-check"
-" let g:syntastic_check_on_open=1
-" let g:syntastic_python_flake8_args = "--ignore=E121,E123,E126,E226,E24,E704,E501"
-" let g:syntastic_python_flake8_args="--ignore=E401,E501,E701,E121,E123,E126,E133,E226,E241,E242,E704,W503"
-
 " w0pr/ale tweaks - https://github.com/w0rp/ale
 let g:ale_echo_msg_error_str = 'Err'
 let g:ale_echo_msg_warning_str = 'Warn'
@@ -430,6 +425,11 @@ let g:ale_sign_warning = 'W.'
 " TF Files in a different color
 " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
 autocmd BufEnter *.tf* colorscheme Tomorrow-Night
+
+" Yaml files in a different color
+autocmd BufEnter *.yaml :call YamlEdit()
+autocmd BufEnter *.yml :call YamlEdit()
+
 
 " terraform fmt
 let g:terraform_fmt_on_save=1
@@ -445,6 +445,14 @@ let g:afterglow_italic_comments=1
 " https://vi.stackexchange.com/questions/10597/trailing-spaces-when-copying-text-from-vim-session-in-one-server-to-vim-session
 " highlight ColorColumn ctermbg=magenta
 " call matchadd('ColorColumn', '\%81v', 100)
+
+" IndenGuides settings
+let g:indent_guides_start_level=2
+let g:indent_guides_guide_size=1
+
+" Rainbow parentheses settings
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -513,18 +521,37 @@ nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :no
 nmap <silent> <Leader>t :NERDTreeTabsToggle<CR>
 
 let g:lightline = {
-      \ 'colorscheme': 'deepspace',
+      \ 'colorscheme': 'landscape',
       \ 'active': {
-      \   'left':  [ [ 'mode', 'paste', 'filename', 'gitbranch' ],
-      \              [ ' ', 'lineinfo', 'percent' ],
+      \   'left':  [ [ 'mode' ], ['paste', 'filename', 'gitbranch' ],
+      \              [ ' ', 'line', 'column','percent' ],
       \            ],
       \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
       \              [ 'modified', 'readonly' ],
       \            ]
       \ },
+      \ 'tab':  {
+      \   'active': [ 'tabnum', 'filename', 'modified' ],
+      \   'inactive': [ 'tabnum', 'filename', 'modified' ]
+      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },                                                                                                                                             
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \   'fullfilename': 'FullFilename',
+      \ },
+      \ 'mode_map': {
+      \ 'n' : 'N',
+      \ 'i' : 'I',
+      \ 'R' : 'R',
+      \ 'v' : 'V',
+      \ 'V' : 'VL',
+      \ "\<C-v>": 'VB',
+      \ 'c' : 'C',
+      \ 's' : 'S',
+      \ 'S' : 'SL',
+      \ "\<C-s>": 'SB',
+      \ 't': 'T',
       \ },
       \ }
 " FullFilename function for lightline
@@ -688,7 +715,7 @@ function! GutterClean() abort
   let g:guttercleaned = 1
   :ALEDisable
   :GitGutterDisable
-  :IndentLinesDisable
+  :IndentGuidesDisable
   set norelativenumber
   set nonumber
 endfunction
@@ -697,7 +724,7 @@ function! Gutter() abort
   let g:noguttercleaned = 0
   :ALEEnable
   :GitGutterEnable
-  :IndentLinesEnable
+  :IndentGuidesEnable
   set relativenumber
   set number
 endfunction
@@ -714,7 +741,7 @@ let hiddens_are_shown = 0
 function! ShowHidden() abort
   set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
   " Makes Trailing lightgrey
-  hi NonText term=reverse term=bold ctermfg=lightgrey 
+  hi NonText term=reverse term=bold ctermfg=lightgrey
   " Makes Leading spaces lightgrey
   hi SpecialKey ctermfg=lightgrey
   set list
@@ -732,4 +759,9 @@ function! HiddenToggle() abort
     else
       call ShowHidden()
     endif
+endfunction
+
+function! YamlEdit() abort
+    set cursorcolumn
+    :colorscheme blue-mood
 endfunction
