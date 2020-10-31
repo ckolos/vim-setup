@@ -1,8 +1,6 @@
-
 " Use vim mode, not vi-compatible
 set nocompatible
 filetype off
-"
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -21,6 +19,7 @@ Plug 'icymind/NeoSolarized'
 Plug 'jnurmine/zenburn'
 Plug 'joedicastro/vim-github256'
 Plug 'john2x/flatui.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'pkukulak/idle'
@@ -34,14 +33,12 @@ Plug 'w0ng/vim-hybrid'
 " Status line
 Plug 'itchyny/lightline.vim'
 
-" NERDTree icons
-
 " Syntax and file type
 Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
 " Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'vim-scripts/gnupg.vim'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 "
 " Git Shit
@@ -73,14 +70,12 @@ Plug 'chrisbra/NrrwRgn'
 "
 Plug 'ctrlpvim/ctrlp.vim'
 " Basic Usage
-"
 "    Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
 "    Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
 "    Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
 "
-"Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
-"Once CtrlP is open:
-"
+"    Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
+"    Once CtrlP is open:
 "    Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
 "    Press <c-f> and <c-b> to cycle between modes.
 "    Press <c-d> to switch to filename only search instead of full path.
@@ -99,7 +94,6 @@ Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymo
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf.vim'
 ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
 ":GFiles [OPTS] 	Git files (git ls-files)
 ":GFiles? 	Git files (git status)
@@ -124,14 +118,21 @@ Plug 'junegunn/fzf.vim'
 ":Maps 	Normal mode mappings
 ":Helptags 	Help tags 1
 ":Filetypes 	File types
-"
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
+
 Plug 'mhinz/vim-startify'
-Plug 'nathanaelkane/vim-indent-guides'
+"Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
 " Plug 'tpope/vim-vinegar'
-" Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 call plug#end()
+
+" used to trigger the FileType event
+" used to set the syntax highlighting, set options, etc
+filetype on
+" filetype indent on
+filetype plugin on
 
 " override the terminal colors and force 256 color mode
 if &term =~# 'rxvt-unicode-256color'
@@ -142,7 +143,8 @@ else
   let &t_8f = "[38;2;%lu;%lu;%lum"
   let &t_8b = "[48;2;%lu;%lu;%lum"
   "colorscheme monokai-phoenix
-  colorscheme Iosvkem
+  " colorscheme Iosvkem
+  colorscheme onedark
 endif
 
 " clearing uses the current background color
@@ -151,12 +153,6 @@ set t_ut=
 " turn on syntax highlighting
 syntax enable
 
-" used to trigger the FileType event
-" used to set the syntax highlighting, set options, etc
-filetype on
-filetype indent on
-filetype plugin on
-"
 " Change leader to \
 let mapleader = ","
 
@@ -223,6 +219,9 @@ set noswapfile
 " no, really, don't make a backup of a file; even when writing over it.
 set nowb
 
+" turn off @$*&#$(*&# textwrap
+set nowrap
+
 " turn on line-numbering and relative line number
 set number relativenumber
 
@@ -238,10 +237,9 @@ set scrolloff=3
 "Align indent to next multiple value of shiftwidth. For its meaning,
 " see http://tinyurl.com/y5n87a6m
 set shiftround
-"
+
 " Number of spaces to use for each auto-indent
 set shiftwidth=2
-
 
 " Show the partial command being run at the bottom of the screen
 set showcmd
@@ -268,6 +266,9 @@ set showtabline=2
 
 " Number of spaces per tab when not editing; i.e. how does a tab 'look'
 set tabstop=2
+
+" Turn off textwidth
+set textwidth=0
 
 " change the title of the current terminal to the current edited file when
 " editing
@@ -298,6 +299,7 @@ set wildmode=list:longest,full
 
 " wrap the file when stepping through search matches
 set wrapscan
+
 
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
@@ -331,7 +333,6 @@ noremap \Y "+Y
 noremap \p "+p
 
 " Use space to toggle folds
-"
 nnoremap <Space> za
 vnoremap <Space> za
 
@@ -408,6 +409,11 @@ let g:EasyMotion_smartcase = 1
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
 
+" Indent Line color settings
+let g:indentLine_setColors = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_enabled = 0
+
 " JSON Filetype setting - needed for the json vundle
 let g:vim_json_syntax_conceal = 0
 
@@ -421,6 +427,16 @@ let g:ale_echo_msg_warning_str = 'Warn'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_error = 'E!'
 let g:ale_sign_warning = 'W.'
+let g:ale_linters = {
+      \   'python': ['flake8', 'yapf'],
+      \}
+let g:ale_fixers = {
+      \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
+      \   'python': ['add_blank_lines_for_python_control_statements',
+      \              'black', 'isort', 'trim_whitespace'],
+      \}
+set omnifunc=ale#completion#OmniFunc
+
 
 " TF Files in a different color
 " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
@@ -429,7 +445,6 @@ autocmd BufEnter *.tf* colorscheme Tomorrow-Night
 " Yaml files in a different color
 autocmd BufEnter *.yaml :call YamlEdit()
 autocmd BufEnter *.yml :call YamlEdit()
-
 
 " terraform fmt
 let g:terraform_fmt_on_save=1
@@ -446,9 +461,9 @@ let g:afterglow_italic_comments=1
 " highlight ColorColumn ctermbg=magenta
 " call matchadd('ColorColumn', '\%81v', 100)
 
-" IndenGuides settings
+" IndentGuides settings
 let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
+let g:indent_guides_guide_size=4
 
 " Rainbow parentheses settings
 let g:rainbow#max_level = 16
@@ -501,14 +516,15 @@ set wildignore+=*.pyc " Python byte code
 set wildignore+=*.orig " Merge resolution files
 
 " let g:nerdtree_tabs_open_on_console_startup = 1
+"
 " Disable/Enable ALE with leader a
 " nmap <silent> <Leader>a :ALEToggle<CR>
 " Show cursorcolumn with leader c
 " nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Toggle GitGutter with leader g
-" nmap <silent> <Leader>g :GitGutterToggle<CR>
+nmap <silent> <Leader>g :GitGutterToggle<CR>
 " Toggle IndentLines with leader i
-" nmap <silent> <Leader>i :IndentLinesToggle<cr>
+nmap <silent> <Leader>i :IndentLinesToggle<cr>
 " Show cursorcolumn with leader c
 nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Use leader-f to call :FZFNeigh
@@ -523,7 +539,8 @@ nmap <silent> <Leader>t :NERDTreeTabsToggle<CR>
 let g:lightline = {
       \ 'colorscheme': 'landscape',
       \ 'active': {
-      \   'left':  [ [ 'mode' ], ['paste', 'filename', 'gitbranch' ],
+      \   'left':  [ [ 'mode' ],
+      \              ['paste', 'filename', 'gitbranch' ],
       \              [ ' ', 'line', 'column','percent' ],
       \            ],
       \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
@@ -534,26 +551,33 @@ let g:lightline = {
       \   'active': [ 'tabnum', 'filename', 'modified' ],
       \   'inactive': [ 'tabnum', 'filename', 'modified' ]
       \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },                                                                                                                                             
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+      \ 'separator': {
+      \   'left': "\ue0b0",
+      \   'right': "\ue0b2"
+      \ },
+      \ 'subseparator': {
+      \   'left': "\ue0b1",
+      \   'right': "\ue0b3"
+      \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \   'fullfilename': 'FullFilename',
       \ },
       \ 'mode_map': {
-      \ 'n' : 'N',
-      \ 'i' : 'I',
-      \ 'R' : 'R',
-      \ 'v' : 'V',
-      \ 'V' : 'VL',
-      \ "\<C-v>": 'VB',
-      \ 'c' : 'C',
-      \ 's' : 'S',
-      \ 'S' : 'SL',
-      \ "\<C-s>": 'SB',
-      \ 't': 'T',
+      \   'n' : 'N',
+      \   'i' : 'I',
+      \   'R' : 'R',
+      \   'v' : 'V',
+      \   'V' : 'V-LINE',
+      \   "\<C-v>": 'V-BLOCK',
+      \   'c' : 'C',
+      \   's' : 'S',
+      \   'S' : 'S-LINE',
+      \   "\<C-s>": 'S-BLOCK',
+      \   't': 'T',
       \ },
-      \ }
+    \ }
+
 " FullFilename function for lightline
 function! FullFilename()
   return expand('%:p')
@@ -569,7 +593,6 @@ if exists("##CmdLineEnter")
         autocmd CmdLineLeave : set smartcase
     augroup END
 endif
-
 
 " Rename tabs to show tab number.
 " (Based on http://stackoverflow.com/questions/5927952/whats-implementation-of-vims-default-tabline-function)
@@ -715,7 +738,7 @@ function! GutterClean() abort
   let g:guttercleaned = 1
   :ALEDisable
   :GitGutterDisable
-  :IndentGuidesDisable
+  :IndentLinesDisable
   set norelativenumber
   set nonumber
 endfunction
@@ -724,7 +747,7 @@ function! Gutter() abort
   let g:noguttercleaned = 0
   :ALEEnable
   :GitGutterEnable
-  :IndentGuidesEnable
+  :IndentLinesEnable
   set relativenumber
   set number
 endfunction
