@@ -10,25 +10,29 @@ call plug#begin('~/.vim/plugged')
 " Look and Feel
 Plug 'arcticicestudio/nord-vim'
 Plug 'antlypls/vim-colors-codeschool'
-Plug 'chriskempson/vim-tomorrow-theme'
+" Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ckolos/blue-mood-vim'
-Plug 'danilo-augusto/vim-afterglow'
-Plug 'doums/darcula'
-Plug 'Gabirel/molokai'
+" Plug 'danilo-augusto/vim-afterglow'
+" Plug 'doums/darcula'
+" Plug 'Gabirel/molokai'
 Plug 'icymind/NeoSolarized'
 Plug 'jnurmine/zenburn'
 Plug 'joedicastro/vim-github256'
-Plug 'john2x/flatui.vim'
+" Plug 'john2x/flatui.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
-Plug 'pkukulak/idle'
+" Plug 'pkukulak/idle'
 Plug 'rakr/vim-one'
 Plug 'SpaceVim/vim-material'
 Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'vim-scripts/ibmedit.vim'
+" Plug 'vim-scripts/ibmedit.vim'
 Plug 'vim-scripts/wombat256.vim'
-Plug 'w0ng/vim-hybrid'
+" Plug 'w0ng/vim-hybrid'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Status line
 Plug 'itchyny/lightline.vim'
@@ -36,7 +40,6 @@ Plug 'itchyny/lightline.vim'
 " Syntax and file type
 Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
-" Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'vim-scripts/gnupg.vim'
 Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
@@ -50,9 +53,9 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-rhubarb'
 "
 " NerdTree
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'scrooloose/nerdtree'
 "Plug 'vim-scripts/bufexplorer.zip'
 "
 " Misc
@@ -153,11 +156,15 @@ set t_ut=
 " turn on syntax highlighting
 syntax enable
 
+" used to trigger the FileType event
+" used to set the syntax highlighting, set options, etc
+filetype on
+filetype indent on
+filetype plugin on
+
 " Change leader to \
 let mapleader = ","
 
-" Remove .netrwhist files
-let g:netrw_dirhistmax = 0
 
 " allow backspace to remove indent,eol, and start of doc
 set backspace=2
@@ -534,7 +541,19 @@ nmap <silent> <Leader>h :call HiddenToggle()<CR>
 " Poor-man's trailing white-space removal leader s
 nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 " Open/close NERDTree Tabs with leader t
-nmap <silent> <Leader>t :NERDTreeTabsToggle<CR>
+nmap <silent> <Leader>t :Vexplore<CR>
+
+" Make netrw look/act like NERDTree
+let g:netrw_dirhistmax = 0
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 let g:lightline = {
       \ 'colorscheme': 'landscape',
@@ -551,14 +570,8 @@ let g:lightline = {
       \   'active': [ 'tabnum', 'filename', 'modified' ],
       \   'inactive': [ 'tabnum', 'filename', 'modified' ]
       \ },
-      \ 'separator': {
-      \   'left': "\ue0b0",
-      \   'right': "\ue0b2"
-      \ },
-      \ 'subseparator': {
-      \   'left': "\ue0b1",
-      \   'right': "\ue0b3"
-      \ },
+      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \   'fullfilename': 'FullFilename',
