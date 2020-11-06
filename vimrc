@@ -47,10 +47,10 @@ Plug 'sheerun/vim-polyglot'
 "
 " Git Shit
 Plug 'airblade/vim-gitgutter'
-Plug 'cohama/agit.vim'              " :Agit
+" Plug 'cohama/agit.vim'              " :Agit
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
+" Plug 'tpope/vim-git' "
 Plug 'tpope/vim-rhubarb'
 "
 " NerdTree
@@ -157,15 +157,8 @@ set t_ut=
 " turn on syntax highlighting
 syntax enable
 
-" used to trigger the FileType event
-" used to set the syntax highlighting, set options, etc
-filetype on
-filetype indent on
-filetype plugin on
-
 " Change leader to \
 let mapleader = ","
-
 
 " allow backspace to remove indent,eol, and start of doc
 set backspace=2
