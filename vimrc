@@ -573,16 +573,16 @@ let g:lightline = {
       \   'fullfilename': 'FullFilename',
       \ },
       \ 'mode_map': {
-      \   'n' : 'N',
-      \   'i' : 'I',
-      \   'R' : 'R',
-      \   'v' : 'V',
+      \   'n' : 'NOR',
+      \   'i' : 'INS',
+      \   'R' : 'REP',
+      \   'v' : 'VIS',
       \   'V' : 'V-LINE',
       \   "\<C-v>": 'V-BLOCK',
-      \   'c' : 'C',
-      \   's' : 'S',
-      \   'S' : 'S-LINE',
-      \   "\<C-s>": 'S-BLOCK',
+      \   'c' : 'CHA',
+      \   's' : 'SEL',
+      \   'S' : 'SEL-LINE',
+      \   "\<C-s>": 'SEL-BLOCK',
       \   't': 'T',
       \ },
     \ }
@@ -726,13 +726,14 @@ endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 command! FZFNeigh call s:fzf_neighbouring_files()
 nnoremap <silent> <Leader>F :FZF<CR>
-nnoremap <silent> <Leader>Ff :Files<CR>
-nnoremap <silent> <Leader>Fr :Rg<CR>
-nnoremap <silent> <Leader>FL :Lines<CR>
 nnoremap <silent> <Leader>Fb :Blines<CR>
+nnoremap <silent> <Leader>Fc :Commands<CR>
+nnoremap <silent> <Leader>Ff :Files<CR>
 nnoremap <silent> <Leader>FH :History<CR>
 nnoremap <silent> <Leader>Fh :History:<CR>
-nnoremap <silent> <Leader>Fc :Commands<CR>
+nnoremap <silent> <Leader>FL :Lines<CR>
+nnoremap <silent> <Leader>Fn :FZFNeigh<CR>
+nnoremap <silent> <Leader>Fr :Rg<CR>
 
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_conceal = 0
