@@ -21,13 +21,15 @@ Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ckolos/blue-mood-vim'
+Plug 'ckolos/onedark.vim'
 Plug 'icymind/NeoSolarized'
+Plug 'itchyny/landscape.vim'
 Plug 'jnurmine/zenburn'
 Plug 'joedicastro/vim-github256'
-Plug 'joshdick/onedark.vim'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'rakr/vim-one'
+Plug 'srcery-colors/srcery-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
 
@@ -550,7 +552,7 @@ let g:netrw_winsize = 25
 "augroup END
 
 let g:lightline = {
-      \ 'colorscheme': 'landscape',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left':  [ [ 'mode' ],
       \              ['paste', 'filename', 'gitbranch' ],
