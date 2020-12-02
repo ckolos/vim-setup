@@ -32,6 +32,7 @@ Plug 'rakr/vim-one'
 Plug 'srcery-colors/srcery-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
+Plug 'connorholyday/vim-snazzy'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -261,8 +262,8 @@ set showmatch
 " can be overridden by the filetype
 set softtabstop=2
 
-" Split window below/right when creating horizontal/vertical windows
-set splitbelow splitright
+" New windows will be below or to the right of the current window
+" set splitbelow botright
 
 " Always show the tabline
 set showtabline=2
@@ -541,11 +542,20 @@ nmap <silent> <Leader>t :Vexplore<CR>
 
 " Make netrw look/act like NERDTree
 let g:netrw_dirhistmax = 0
+"
+" Remove banner
 let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+
+" Wide list style (0 - thin+one file per line , 1 - long+file size, 2 - Wide, 3 - Tree
+let g:netrw_liststyle = 1
+
+" 1 - horiz split; 2 - Vert; 3 - New tab; 4 - pervious window
+let g:netrw_browse_split = 3
+"
+" Size of resulting split
+let g:netrw_winsize = 75
+
+" let g:netrw_altv = 1
 "augroup ProjectDrawer
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
@@ -592,7 +602,6 @@ function! FullFilename()
   return expand('%:p')
 endfunction
 
-"{ Auto commands
 " Do not use smart case in command line mode,
 " extracted from https://goo.gl/vCTYdK
 if exists("##CmdLineEnter")
@@ -650,13 +659,51 @@ if exists("+showtabline")
 endif
 
 " Tmuxline config
-let g:tmuxline_separators = {
-    \ 'left' : '',
-    \ 'left_alt': '>',
-    \ 'right' : '',
-    \ 'right_alt' : '<',
-    \ 'space' : ' '}
-
+"let g:tmuxline_status_justify = 'left'
+"let g:tmuxline_separators = {
+"    \ 'left' : '',
+"    \ 'left_alt': '>',
+"    \ 'right' : '',
+"    \ 'right_alt' : '<',
+"    \ 'space' : ' '}
+"
+"tmuxline#api#set_theme({
+"      \ 'a': ['237', '109', 'bold'],
+"      \ 'b': ['109', '236', ''],
+"      \ 'bg': ['240', '237', ''],
+"      \ 'c': ['240', '237', ''],
+"      \ 'cwin': ['109', '236', ''],
+"      \ 'win': ['240', '237', ''],
+"      \ 'x': ['240', '237', ''],
+"      \ 'y': ['109', '236', ''],
+"      \ 'z': ['237', '109', '']})
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#F#I', '#W'],
+      \'x'    : '',
+      \'y'    : '#(date)',
+      \'z'    : '#H',
+      \'options' : {'status-justify' : 'left'}}
+"let g:tmuxline_preset = {
+"      \'a'    : '#S',
+"      \'win'  : ['#I', '#W'],
+"      \'cwin' : ['#I', '#W', '#F'],
+"      \'y'    : ['%R', '%a', '%Y'],
+"      \'z'    : '#H'}
+"
+" Defaults
+"let g:tmuxline_preset = {
+"      \'a'    : '#S',
+"      \'b'    : '#W',
+"      \'c'    : '#H',
+"      \'win'  : '#I #W',
+"      \'cwin' : '#I #W',
+"      \'x'    : '%a',
+"      \'y'    : '#W %R',
+"      \'z'    : '#H'}
+"
 " FZF Stuff
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -686,8 +733,8 @@ let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 nnoremap <silent> <Leader>C :call fzf#run({
 \   'source':
-\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+\     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
 \   'sink':    'colo',
 \   'options': '+m --reverse',
 \   'left':    30
@@ -798,3 +845,4 @@ function! YamlEdit() abort
     set cursorcolumn
     :colorscheme blue-mood
 endfunction
+
