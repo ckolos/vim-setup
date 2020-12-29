@@ -11,6 +11,11 @@ call plug#begin('~/.vim/plugged')
 " Plug 'Gabirel/molokai'
 " Plug 'chriskempson/vim-tomorrow-theme'
 " Plug 'danilo-augusto/vim-afterglow'
+  " Afterglow colorscheme settings
+  " let g:afterglow_blackout=1
+  " let g:afterglow_italic_comments=1
+  " If you need this, don't use blackout above
+  "let g:afterglow_inherit_background=1
 " Plug 'doums/darcula'
 " Plug 'john2x/flatui.vim'
 " Plug 'pkukulak/idle'
@@ -35,104 +40,317 @@ Plug 'vim-scripts/wombat256.vim'
 Plug 'connorholyday/vim-snazzy'
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+"Plug 'SirVer/ultisnips'
+  " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+  " - https://github.com/Valloric/YouCompleteMe
+  " - https://github.com/nvim-lua/completion-nvim
+  " let g:UltiSnipsExpandTrigger="<tab>"
+  " let g:UltiSnipsJumpForwardTrigger="<c-b>"
+  " let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+  " If you want :UltiSnipsEdit to split your window.
+  " let g:UltiSnipsEditSplit="vertical"
+
+" Plug 'honza/vim-snippets'
 
 " Status line
 Plug 'itchyny/lightline.vim'
+  let g:lightline = {
+        \ 'colorscheme': 'onedark',
+        \ 'active': {
+        \   'left':  [ [ 'mode' ],
+        \              ['paste', 'filename', 'gitbranch' ],
+        \              [ ' ', 'line', 'column','percent' ],
+        \            ],
+        \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
+        \              [ 'modified', 'readonly' ],
+        \            ]
+        \ },
+        \ 'tab':  {
+        \   'active': [ 'tabnum', 'filename', 'modified' ],
+        \   'inactive': [ 'tabnum', 'filename', 'modified' ]
+        \ },
+        \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+        \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+        \ 'component_function': {
+        \   'gitbranch': 'fugitive#head',
+        \   'fullfilename': 'FullFilename',
+        \ },
+        \ 'mode_map': {
+        \   'n' : 'NOR',
+        \   'i' : 'INS',
+        \   'R' : 'REP',
+        \   'v' : 'VIS',
+        \   'V' : 'V-LINE',
+        \   "\<C-v>": 'V-BLOCK',
+        \   'c' : 'CHA',
+        \   's' : 'SEL',
+        \   'S' : 'SEL-LINE',
+        \   "\<C-s>": 'SEL-BLOCK',
+        \   't': 'T',
+        \ },
+      \ }
 
+  " FullFilename function for lightline
+  function! FullFilename()
+    return expand('%:p')
+  endfunction
+"
 " Syntax and file type
 Plug 'elzr/vim-json'
+  let g:vim_json_syntax_conceal = 0
+
 Plug 'hashivim/vim-terraform'
+  " terraform fmt
+  let g:terraform_fmt_on_save=1
+
 Plug 'vim-scripts/gnupg.vim'
+
 Plug 'dense-analysis/ale'
+  let g:ale_echo_msg_error_str = 'Err'
+  let g:ale_echo_msg_warning_str = 'Warn'
+  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+  let g:ale_fixers = {
+        \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
+        \   'python': ['add_blank_lines_for_python_control_statements',
+        \              'black', 'isort', 'trim_whitespace'],
+        \}
+  let g:ale_linters = {
+        \   'python': ['flake8', 'yapf'],
+        \}
+  let g:ale_sign_error = 'E!'
+  let g:ale_sign_warning = 'W.'
+  set omnifunc=ale#completion#OmniFunc
 Plug 'sheerun/vim-polyglot'
 "
 " Git Shit
 Plug 'airblade/vim-gitgutter'
-" Plug 'cohama/agit.vim'              " :Agit
+" Plug 'cohama/agit.vim'
+  " :AGit
+
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
+
 " Plug 'tpope/vim-git' "
+
 Plug 'tpope/vim-rhubarb'
-"
+
 " NerdTree
 " Plug 'jistr/vim-nerdtree-tabs'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'scrooloose/nerdtree'
-"Plug 'vim-scripts/bufexplorer.zip'
-"
+" Plug 'vim-scripts/bufexplorer.zip'
+
 " Misc
 Plug 'chrisbra/NrrwRgn'
-" :NR  - Open the selected region in a new narrowed window
-":NW  - Open the current visual window in a new narrowed window
-":WR  - (In the narrowed window) write the changes back to the original buffer.
-":NRV - Open the narrowed window for the region that was last visually selected.
-":NUD - (In a unified diff) open the selected diff in 2 Narrowed windows
-":NRP - Mark a region for a Multi narrowed window
-":NRM - Create a new Multi narrowed window (after :NRP) - experimental!
-":NRS - Enable Syncing the buffer content back (default on)
-":NRN - Disable Syncing the buffer content back
-":NRL - Reselect the last selected region and open it again in a narrowed window
-"
+  ":NR  - Open the selected region in a new narrowed window
+  ":NW  - Open the current visual window in a new narrowed window
+  ":WR  - (In the narrowed window) write the changes back to the original buffer.
+  ":NRV - Open the narrowed window for the region that was last visually selected.
+  ":NUD - (In a unified diff) open the selected diff in 2 Narrowed windows
+  ":NRP - Mark a region for a Multi narrowed window
+  ":NRM - Create a new Multi narrowed window (after :NRP) - experimental!
+  ":NRS - Enable Syncing the buffer content back (default on)
+  ":NRN - Disable Syncing the buffer content back
+  ":NRL - Reselect the last selected region and open it again in a narrowed window
+
 Plug 'ctrlpvim/ctrlp.vim'
-" Basic Usage
-"    Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
-"    Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
-"    Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
-"
-"    Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
-"    Once CtrlP is open:
-"    Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
-"    Press <c-f> and <c-b> to cycle between modes.
-"    Press <c-d> to switch to filename only search instead of full path.
-"    Press <c-r> to switch to regexp mode.
-"    Use <c-j>, <c-k> or the arrow keys to navigate the result list.
-"    Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
-"    Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
-"    Use <c-y> to create a new file and its parent directories.
-"    Use <c-z> to mark/unmark multiple files and <c-o> to open them.
-"
-"Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
-"
-"    Submit two or more dots .. to go up the directory tree by one or multiple levels.
-"    End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
-Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymotion
+  " Basic Usage
+  "    Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
+  "    Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
+  "    Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
+  "
+  "    Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
+  "    Once CtrlP is open:
+  "    Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+  "    Press <c-f> and <c-b> to cycle between modes.
+  "    Press <c-d> to switch to filename only search instead of full path.
+  "    Press <c-r> to switch to regexp mode.
+  "    Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+  "    Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+  "    Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+  "    Use <c-y> to create a new file and its parent directories.
+  "    Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+  "
+  "Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
+  "
+  "    Submit two or more dots .. to go up the directory tree by one or multiple levels.
+  "    End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
+Plug 'easymotion/vim-easymotion'
+  " https://github.com/easymotion/vim-easymotion
+
 Plug 'editorconfig/editorconfig-vim'
+
 Plug 'edkolev/tmuxline.vim'
+  " Tmuxline config
+  "let g:tmuxline_status_justify = 'left'
+  "let g:tmuxline_separators = {
+  "    \ 'left' : '',
+  "    \ 'left_alt': '>',
+  "    \ 'right' : '',
+  "    \ 'right_alt' : '<',
+  "    \ 'space' : ' '}
+  "
+  "tmuxline#api#set_theme({
+  "      \ 'a': ['237', '109', 'bold'],
+  "      \ 'b': ['109', '236', ''],
+  "      \ 'bg': ['240', '237', ''],
+  "      \ 'c': ['240', '237', ''],
+  "      \ 'cwin': ['109', '236', ''],
+  "      \ 'win': ['240', '237', ''],
+  "      \ 'x': ['240', '237', ''],
+  "      \ 'y': ['109', '236', ''],
+  "      \ 'z': ['237', '109', '']})
+  let g:tmuxline_preset = {
+        \'a'    : '#S',
+        \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
+        \'win'  : ['#I', '#W'],
+        \'cwin' : ['#F#I', '#W'],
+        \'x'    : '',
+        \'y'    : '#(date)',
+        \'z'    : '#H',
+        \'options' : {'status-justify' : 'left'}}
+  "let g:tmuxline_preset = {
+  "      \'a'    : '#S',
+  "      \'win'  : ['#I', '#W'],
+  "      \'cwin' : ['#I', '#W', '#F'],
+  "      \'y'    : ['%R', '%a', '%Y'],
+  "      \'z'    : '#H'}
+  "
+  " Defaults
+  "let g:tmuxline_preset = {
+  "      \'a'    : '#S',
+  "      \'b'    : '#W',
+  "      \'c'    : '#H',
+  "      \'win'  : '#I #W',
+  "      \'cwin' : '#I #W',
+  "      \'x'    : '%a',
+  "      \'y'    : '#W %R',
+  "      \'z'    : '#H'}
+  "
 Plug 'godlygeek/tabular'
-":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
-":GFiles [OPTS] 	Git files (git ls-files)
-":GFiles? 	Git files (git status)
-":Buffers 	Open buffers
-":Colors 	Color schemes
-":Ag [PATTERN] 	ag search result (ALT-A to select all, ALT-D to deselect all)
-":Rg [PATTERN] 	rg search result (ALT-A to select all, ALT-D to deselect all)
-":Lines [QUERY] 	Lines in loaded buffers
-":BLines [QUERY] 	Lines in the current buffer
-":Tags [QUERY] 	Tags in the project (ctags -R)
-":BTags [QUERY] 	Tags in the current buffer
-":Marks 	Marks
-":Windows 	Windows
-":Locate PATTERN 	locate command output
-":History 	v:oldfiles and open buffers
-":History: 	Command history
-":History/ 	Search history
-":Snippets 	Snippets (UltiSnips)
-":Commits 	Git commits (requires fugitive.vim)
-":BCommits 	Git commits for the current buffer
-":Commands 	Commands
-":Maps 	Normal mode mappings
-":Helptags 	Help tags 1
-":Filetypes 	File types
+  " http://vimcasts.org/episodes/aligning-text-with-tabular-vim/
+
 Plug 'junegunn/fzf.vim'
+  ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
+  ":GFiles [OPTS] 	Git files (git ls-files)
+  ":GFiles? 	Git files (git status)
+  ":Buffers 	Open buffers
+  ":Colors 	Color schemes
+  ":Ag [PATTERN] 	ag search result (ALT-A to select all, ALT-D to deselect all)
+  ":Rg [PATTERN] 	rg search result (ALT-A to select all, ALT-D to deselect all)
+  ":Lines [QUERY] 	Lines in loaded buffers
+  ":BLines [QUERY] 	Lines in the current buffer
+  ":Tags [QUERY] 	Tags in the project (ctags -R)
+  ":BTags [QUERY] 	Tags in the current buffer
+  ":Marks 	Marks
+  ":Windows 	Windows
+  ":Locate PATTERN 	locate command output
+  ":History 	v:oldfiles and open buffers
+  ":History: 	Command history
+  ":History/ 	Search history
+  ":Snippets 	Snippets (UltiSnips)
+  ":Commits 	Git commits (requires fugitive.vim)
+  ":BCommits 	Git commits for the current buffer
+  ":Commands 	Commands
+  ":Maps 	Normal mode mappings
+  ":Helptags 	Help tags 1
+  ":Filetypes 	File types
+  " FZF Stuff
+  let g:fzf_action = {
+    \ 'ctrl-t': 'tab split',
+    \ 'ctrl-x': 'split',
+    \ 'ctrl-v': 'vsplit' }
+
+  " Default fzf layout
+  " - down / up / left / right
+  let g:fzf_layout = { 'down': '~40%' }
+
+  let g:fzf_colors =
+  \ { 'fg':      ['fg', 'Normal'],
+    \ 'bg':      ['bg', 'Normal'],
+    \ 'hl':      ['fg', 'Comment'],
+    \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+    \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+    \ 'hl+':     ['fg', 'Statement'],
+    \ 'info':    ['fg', 'PreProc'],
+    \ 'border':  ['fg', 'Ignore'],
+    \ 'prompt':  ['fg', 'Conditional'],
+    \ 'pointer': ['fg', 'Exception'],
+    \ 'marker':  ['fg', 'Keyword'],
+    \ 'spinner': ['fg', 'Label'],
+    \ 'header':  ['fg', 'Comment'] }
+  let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+  let g:fzf_commands_expect = 'alt-enter,ctrl-x'
+
+  nnoremap <silent> <Leader>C :call fzf#run({
+  \   'source':
+  \     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+  \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
+  \   'sink':    'colo',
+  \   'options': '+m --reverse',
+  \   'left':    30
+  \ })<CR>
+
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+    \   <bang>0 ? fzf#vim#with_preview('up:60%')
+    \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+
+  command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+  function! s:fzf_neighbouring_files()
+    let current_file =expand("%")
+    let cwd = fnamemodify(current_file, ':p:h')
+    let command = 'rg --files --no-follow  ' . cwd . ''
+
+    call fzf#run({
+          \ 'source': command,
+          \ 'sink':   'e',
+          \ 'options': '-m -x +s',
+          \ 'window':  'enew' })
+  endfunction
+
+  function! s:fzf_statusline()
+    " Override statusline as you like
+    highlight fzf1 ctermfg=161 ctermbg=251
+    highlight fzf2 ctermfg=23 ctermbg=251
+    highlight fzf3 ctermfg=237 ctermbg=251
+    setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+  endfunction
+
+  autocmd! User FzfStatusLine call <SID>fzf_statusline()
+  command! FZFNeigh call s:fzf_neighbouring_files()
+  nnoremap <silent> <Leader>F :FZF<CR>
+  nnoremap <silent> <Leader>Fb :Blines<CR>
+  nnoremap <silent> <Leader>Fc :Commands<CR>
+  nnoremap <silent> <Leader>Ff :Files<CR>
+  nnoremap <silent> <Leader>FH :History<CR>
+  nnoremap <silent> <Leader>Fh :History:<CR>
+  nnoremap <silent> <Leader>FL :Lines<CR>
+  nnoremap <silent> <Leader>Fn :FZFNeigh<CR>
+  nnoremap <silent> <Leader>Fr :Rg<CR>
+
 Plug 'junegunn/rainbow_parentheses.vim'
+  let g:rainbow#max_level = 16
+  let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
 Plug 'mhinz/vim-startify'
 "Plug 'nathanaelkane/vim-indent-guides'
-Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
+  " IndentGuides settings
+  " let g:indent_guides_start_level=2
+  " let g:indent_guides_guide_size=4
+
+Plug 'terryma/vim-multiple-cursors'
+  " https://github.com/terryma/vim-multiple-cursors
+  "
 " Plug 'tpope/vim-vinegar'
 Plug 'Yggdroot/indentLine'
+  let g:indentLine_setColors = 0
+  let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+  let g:indentLine_enabled = 0
 call plug#end()
 
 " used to trigger the FileType event
@@ -178,9 +396,6 @@ endif
 
 " Copy the structure of the existing lines indent when autoindenting a new line
 set copyindent
-
-" show column indicator; usually, I keep this off and set it as needed
-" set cursorcolumn
 
 " Highlight the screen line of the cursor with CursorLine
 set cursorline
@@ -413,35 +628,6 @@ let g:EasyMotion_smartcase = 1
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
 
-" Indent Line color settings
-let g:indentLine_setColors = 0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_enabled = 0
-
-" JSON Filetype setting - needed for the json vundle
-let g:vim_json_syntax_conceal = 0
-
-" Set airline theme and font
-" let g:airline_theme="luna"
-" let g:airline_powerline_fonts = 1
-
-" w0pr/ale tweaks - https://github.com/w0rp/ale
-let g:ale_echo_msg_error_str = 'Err'
-let g:ale_echo_msg_warning_str = 'Warn'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:ale_sign_error = 'E!'
-let g:ale_sign_warning = 'W.'
-let g:ale_linters = {
-      \   'python': ['flake8', 'yapf'],
-      \}
-let g:ale_fixers = {
-      \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
-      \   'python': ['add_blank_lines_for_python_control_statements',
-      \              'black', 'isort', 'trim_whitespace'],
-      \}
-set omnifunc=ale#completion#OmniFunc
-
-
 " TF Files in a different color
 " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
 autocmd BufEnter *.tf* colorscheme Tomorrow-Night
@@ -450,28 +636,13 @@ autocmd BufEnter *.tf* colorscheme Tomorrow-Night
 autocmd BufEnter *.yaml :call YamlEdit()
 autocmd BufEnter *.yml :call YamlEdit()
 
-" terraform fmt
-let g:terraform_fmt_on_save=1
 
-" Afterglow colorscheme settings
-let g:afterglow_blackout=1
-let g:afterglow_italic_comments=1
-" If you need this, don't use blackout above
-"let g:afterglow_inherit_background=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
 " https://vi.stackexchange.com/questions/10597/trailing-spaces-when-copying-text-from-vim-session-in-one-server-to-vim-session
 " highlight ColorColumn ctermbg=magenta
 " call matchadd('ColorColumn', '\%81v', 100)
-
-" IndentGuides settings
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=4
-
-" Rainbow parentheses settings
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']']]
 
 " Inspired by https://github.com/tpope/vim-unimpaired "
 " Sets paste on and set nopaste when leaving insert mode "
@@ -521,22 +692,24 @@ set wildignore+=*.orig " Merge resolution files
 
 " let g:nerdtree_tabs_open_on_console_startup = 1
 "
-" Disable/Enable ALE with leader a
-" nmap <silent> <Leader>a :ALEToggle<CR>
-" Show cursorcolumn with leader c
-" nmap <silent> <Leader>c :set cursorcolumn!<CR>
-" Toggle GitGutter with leader g
+" leader+g toggle GitGutter
 nmap <silent> <Leader>g :GitGutterToggle<CR>
+
 " Toggle IndentLines with leader i
 nmap <silent> <Leader>i :IndentLinesToggle<cr>
+
 " Show cursorcolumn with leader c
 nmap <silent> <Leader>c :set cursorcolumn!<CR>
+
 " Use leader-f to call :FZFNeigh
 nmap <silent> <Leader><C-f> :FZFNeigh<CR>
+
 " Use leader-h to toggle hidden chars
 nmap <silent> <Leader>h :call HiddenToggle()<CR>
+
 " Poor-man's trailing white-space removal leader s
 nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " Open/close NERDTree Tabs with leader t
 nmap <silent> <Leader>t :Vexplore<CR>
 
@@ -560,47 +733,6 @@ let g:netrw_winsize = 75
 "  autocmd!
 "  autocmd VimEnter * :Vexplore
 "augroup END
-
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left':  [ [ 'mode' ],
-      \              ['paste', 'filename', 'gitbranch' ],
-      \              [ ' ', 'line', 'column','percent' ],
-      \            ],
-      \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
-      \              [ 'modified', 'readonly' ],
-      \            ]
-      \ },
-      \ 'tab':  {
-      \   'active': [ 'tabnum', 'filename', 'modified' ],
-      \   'inactive': [ 'tabnum', 'filename', 'modified' ]
-      \ },
-      \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-      \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'fullfilename': 'FullFilename',
-      \ },
-      \ 'mode_map': {
-      \   'n' : 'NOR',
-      \   'i' : 'INS',
-      \   'R' : 'REP',
-      \   'v' : 'VIS',
-      \   'V' : 'V-LINE',
-      \   "\<C-v>": 'V-BLOCK',
-      \   'c' : 'CHA',
-      \   's' : 'SEL',
-      \   'S' : 'SEL-LINE',
-      \   "\<C-s>": 'SEL-BLOCK',
-      \   't': 'T',
-      \ },
-    \ }
-
-" FullFilename function for lightline
-function! FullFilename()
-  return expand('%:p')
-endfunction
 
 " Do not use smart case in command line mode,
 " extracted from https://goo.gl/vCTYdK
@@ -657,130 +789,6 @@ if exists("+showtabline")
     set showtabline=1
     highlight link TabNum Special
 endif
-
-" Tmuxline config
-"let g:tmuxline_status_justify = 'left'
-"let g:tmuxline_separators = {
-"    \ 'left' : '',
-"    \ 'left_alt': '>',
-"    \ 'right' : '',
-"    \ 'right_alt' : '<',
-"    \ 'space' : ' '}
-"
-"tmuxline#api#set_theme({
-"      \ 'a': ['237', '109', 'bold'],
-"      \ 'b': ['109', '236', ''],
-"      \ 'bg': ['240', '237', ''],
-"      \ 'c': ['240', '237', ''],
-"      \ 'cwin': ['109', '236', ''],
-"      \ 'win': ['240', '237', ''],
-"      \ 'x': ['240', '237', ''],
-"      \ 'y': ['109', '236', ''],
-"      \ 'z': ['237', '109', '']})
-let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#F#I', '#W'],
-      \'x'    : '',
-      \'y'    : '#(date)',
-      \'z'    : '#H',
-      \'options' : {'status-justify' : 'left'}}
-"let g:tmuxline_preset = {
-"      \'a'    : '#S',
-"      \'win'  : ['#I', '#W'],
-"      \'cwin' : ['#I', '#W', '#F'],
-"      \'y'    : ['%R', '%a', '%Y'],
-"      \'z'    : '#H'}
-"
-" Defaults
-"let g:tmuxline_preset = {
-"      \'a'    : '#S',
-"      \'b'    : '#W',
-"      \'c'    : '#H',
-"      \'win'  : '#I #W',
-"      \'cwin' : '#I #W',
-"      \'x'    : '%a',
-"      \'y'    : '#W %R',
-"      \'z'    : '#H'}
-"
-" FZF Stuff
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-
-" Default fzf layout
-" - down / up / left / right
-let g:fzf_layout = { 'down': '~40%' }
-
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-let g:fzf_commands_expect = 'alt-enter,ctrl-x'
-
-nnoremap <silent> <Leader>C :call fzf#run({
-\   'source':
-\     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
-\   'sink':    'colo',
-\   'options': '+m --reverse',
-\   'left':    30
-\ })<CR>
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-function! s:fzf_neighbouring_files()
-  let current_file =expand("%")
-  let cwd = fnamemodify(current_file, ':p:h')
-  let command = 'rg --files --no-follow  ' . cwd . ''
-
-  call fzf#run({
-        \ 'source': command,
-        \ 'sink':   'e',
-        \ 'options': '-m -x +s',
-        \ 'window':  'enew' })
-endfunction
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
-command! FZFNeigh call s:fzf_neighbouring_files()
-nnoremap <silent> <Leader>F :FZF<CR>
-nnoremap <silent> <Leader>Fb :Blines<CR>
-nnoremap <silent> <Leader>Fc :Commands<CR>
-nnoremap <silent> <Leader>Ff :Files<CR>
-nnoremap <silent> <Leader>FH :History<CR>
-nnoremap <silent> <Leader>Fh :History:<CR>
-nnoremap <silent> <Leader>FL :Lines<CR>
-nnoremap <silent> <Leader>Fn :FZFNeigh<CR>
-nnoremap <silent> <Leader>Fr :Rg<CR>
 
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_conceal = 0
@@ -845,4 +853,3 @@ function! YamlEdit() abort
     set cursorcolumn
     :colorscheme blue-mood
 endfunction
-
