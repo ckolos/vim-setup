@@ -7,21 +7,23 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.vim/plugged')
+"
 " Look and Feel
-" Plug 'Gabirel/molokai'
-" Plug 'chriskempson/vim-tomorrow-theme'
-" Plug 'danilo-augusto/vim-afterglow'
-" Plug 'doums/darcula'
-" Plug 'john2x/flatui.vim'
-" Plug 'pkukulak/idle'
-" Plug 'vim-scripts/ibmedit.vim'
-" Plug 'w0ng/vim-hybrid'
+  " Plug 'Gabirel/molokai'
+  " Plug 'danilo-augusto/vim-afterglow'
+  " Plug 'doums/darcula'
+  " Plug 'john2x/flatui.vim'
+  " Plug 'pkukulak/idle'
+  " Plug 'vim-scripts/ibmedit.vim'
+  " Plug 'w0ng/vim-hybrid'
 Plug 'SpaceVim/vim-material'
 Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
 Plug 'arcticicestudio/nord-vim'
+Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ckolos/blue-mood-vim'
 Plug 'ckolos/onedark.vim'
+Plug 'connorholyday/vim-snazzy'
 Plug 'icymind/NeoSolarized'
 Plug 'itchyny/landscape.vim'
 Plug 'jnurmine/zenburn'
@@ -32,112 +34,94 @@ Plug 'rakr/vim-one'
 Plug 'srcery-colors/srcery-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
-Plug 'connorholyday/vim-snazzy'
-
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 " Status line
 Plug 'itchyny/lightline.vim'
 
 " Syntax and file type
+Plug 'dense-analysis/ale'
 Plug 'elzr/vim-json'
 Plug 'hashivim/vim-terraform'
-Plug 'vim-scripts/gnupg.vim'
-Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
-"
+Plug 'vim-scripts/gnupg.vim'
+
 " Git Shit
 Plug 'airblade/vim-gitgutter'
-" Plug 'cohama/agit.vim'              " :Agit
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-git' "
 Plug 'tpope/vim-rhubarb'
-"
-" NerdTree
-" Plug 'jistr/vim-nerdtree-tabs'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'scrooloose/nerdtree'
-"Plug 'vim-scripts/bufexplorer.zip'
-"
+
 " Misc
 Plug 'chrisbra/NrrwRgn'
-" :NR  - Open the selected region in a new narrowed window
-":NW  - Open the current visual window in a new narrowed window
-":WR  - (In the narrowed window) write the changes back to the original buffer.
-":NRV - Open the narrowed window for the region that was last visually selected.
-":NUD - (In a unified diff) open the selected diff in 2 Narrowed windows
-":NRP - Mark a region for a Multi narrowed window
-":NRM - Create a new Multi narrowed window (after :NRP) - experimental!
-":NRS - Enable Syncing the buffer content back (default on)
-":NRN - Disable Syncing the buffer content back
-":NRL - Reselect the last selected region and open it again in a narrowed window
-"
+  " :NR  - Open the selected region in a new narrowed window
+  " :NW  - Open the current visual window in a new narrowed window
+  " :WR  - (In the narrowed window) write the changes back to the original buffer.
+  " :NRV - Open the narrowed window for the region that was last visually selected.
+  " :NUD - (In a unified diff) open the selected diff in 2 Narrowed windows
+  " :NRP - Mark a region for a Multi narrowed window
+  " :NRM - Create a new Multi narrowed window (after :NRP) - experimental!
+  " :NRS - Enable Syncing the buffer content back (default on)
+  " :NRN - Disable Syncing the buffer content back
+  " :NRL - Reselect the last selected region and open it again in a narrowed window
 Plug 'ctrlpvim/ctrlp.vim'
-" Basic Usage
-"    Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
-"    Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
-"    Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
-"
-"    Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
-"    Once CtrlP is open:
-"    Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
-"    Press <c-f> and <c-b> to cycle between modes.
-"    Press <c-d> to switch to filename only search instead of full path.
-"    Press <c-r> to switch to regexp mode.
-"    Use <c-j>, <c-k> or the arrow keys to navigate the result list.
-"    Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
-"    Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
-"    Use <c-y> to create a new file and its parent directories.
-"    Use <c-z> to mark/unmark multiple files and <c-o> to open them.
-"
-"Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
-"
-"    Submit two or more dots .. to go up the directory tree by one or multiple levels.
-"    End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
+  " Basic Usage
+  " Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
+  " Run :CtrlPBuffer or :CtrlPMRU to invoke CtrlP in find buffer or find MRU file mode.
+  " Run :CtrlPMixed to search in Files, Buffers and MRU files at the same time.
+  "
+  " Check :help ctrlp-commands and :help ctrlp-extensions for other commands.
+  " Once CtrlP is open:
+  " Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+  " Press <c-f> and <c-b> to cycle between modes.
+  " Press <c-d> to switch to filename only search instead of full path.
+  " Press <c-r> to switch to regexp mode.
+  " Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+  " Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+  " Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+  " Use <c-y> to create a new file and its parent directories.
+  " Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+  " Run :help ctrlp-mappings or submit ? in CtrlP for more mapping help.
+  " Submit two or more dots .. to go up the directory tree by one or multiple levels.
+  " End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
 Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymotion
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
-":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
-":GFiles [OPTS] 	Git files (git ls-files)
-":GFiles? 	Git files (git status)
-":Buffers 	Open buffers
-":Colors 	Color schemes
-":Ag [PATTERN] 	ag search result (ALT-A to select all, ALT-D to deselect all)
-":Rg [PATTERN] 	rg search result (ALT-A to select all, ALT-D to deselect all)
-":Lines [QUERY] 	Lines in loaded buffers
-":BLines [QUERY] 	Lines in the current buffer
-":Tags [QUERY] 	Tags in the project (ctags -R)
-":BTags [QUERY] 	Tags in the current buffer
-":Marks 	Marks
-":Windows 	Windows
-":Locate PATTERN 	locate command output
-":History 	v:oldfiles and open buffers
-":History: 	Command history
-":History/ 	Search history
-":Snippets 	Snippets (UltiSnips)
-":Commits 	Git commits (requires fugitive.vim)
-":BCommits 	Git commits for the current buffer
-":Commands 	Commands
-":Maps 	Normal mode mappings
-":Helptags 	Help tags 1
-":Filetypes 	File types
 Plug 'junegunn/fzf.vim'
+  ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
+  ":GFiles [OPTS] 	Git files (git ls-files)
+  ":GFiles? 	Git files (git status)
+  ":Buffers 	Open buffers
+  ":Colors 	Color schemes
+  ":Ag [PATTERN] 	ag search result (ALT-A to select all, ALT-D to deselect all)
+  ":Rg [PATTERN] 	rg search result (ALT-A to select all, ALT-D to deselect all)
+  ":Lines [QUERY] 	Lines in loaded buffers
+  ":BLines [QUERY] 	Lines in the current buffer
+  ":Tags [QUERY] 	Tags in the project (ctags -R)
+  ":BTags [QUERY] 	Tags in the current buffer
+  ":Marks 	Marks
+  ":Windows 	Windows
+  ":Locate PATTERN 	locate command output
+  ":History 	v:oldfiles and open buffers
+  ":History: 	Command history
+  ":History/ 	Search history
+  ":Snippets 	Snippets (UltiSnips)
+  ":Commits 	Git commits (requires fugitive.vim)
+  ":BCommits 	Git commits for the current buffer
+  ":Commands 	Commands
+  ":Maps 	Normal mode mappings
+  ":Helptags 	Help tags 1
+  ":Filetypes 	File types
 Plug 'junegunn/rainbow_parentheses.vim'
-
 Plug 'mhinz/vim-startify'
-"Plug 'nathanaelkane/vim-indent-guides'
 Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
-" Plug 'tpope/vim-vinegar'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " used to trigger the FileType event
 " used to set the syntax highlighting, set options, etc
 filetype on
+"
 " filetype indent on
 filetype plugin on
 
@@ -160,7 +144,7 @@ set t_ut=
 " turn on syntax highlighting
 syntax enable
 
-" Change leader to \
+" Change leader to ,
 let mapleader = ","
 
 " allow backspace to remove indent,eol, and start of doc
@@ -276,7 +260,7 @@ set textwidth=0
 
 " change the title of the current terminal to the current edited file when
 " editing
-"set title
+set title
 
 " Show hostname, full path of file and last-mod time on the window title.
 " The meaning of the format str for strftime can be found in
@@ -303,7 +287,6 @@ set wildmode=list:longest,full
 
 " wrap the file when stepping through search matches
 set wrapscan
-
 
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
@@ -408,10 +391,29 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
-let g:EasyMotion_smartcase = 1
+nnoremap <silent> <Leader>F :FZF<CR>
+nnoremap <silent> <Leader>Fb :Blines<CR>
+nnoremap <silent> <Leader>Fc :Commands<CR>
+nnoremap <silent> <Leader>Ff :Files<CR>
+nnoremap <silent> <Leader>FH :History<CR>
+nnoremap <silent> <Leader>Fh :History:<CR>
+nnoremap <silent> <Leader>FL :Lines<CR>
+nnoremap <silent> <Leader>Fn :FZFNeigh<CR>
+nnoremap <silent> <Leader>Fr :Rg<CR>
+
+let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_conceal = 0
+
+nnoremap <silent> <Leader>gc :call GutterClean()<CR>
+nnoremap <silent> <Leader>gu :call Gutter()<CR>
+nnoremap <silent> <Leader>gt :call GutterToggle()<CR>
 
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
+
+let g:EasyMotion_smartcase = 1
+" Set for Hidden() functions below
+let hiddens_are_shown = 0
 
 " Indent Line color settings
 let g:indentLine_setColors = 0
@@ -452,12 +454,6 @@ autocmd BufEnter *.yml :call YamlEdit()
 
 " terraform fmt
 let g:terraform_fmt_on_save=1
-
-" Afterglow colorscheme settings
-let g:afterglow_blackout=1
-let g:afterglow_italic_comments=1
-" If you need this, don't use blackout above
-"let g:afterglow_inherit_background=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
 " line. Found via Damian Conway's vim talk
@@ -597,10 +593,11 @@ let g:lightline = {
       \ },
     \ }
 
-" FullFilename function for lightline
-function! FullFilename()
-  return expand('%:p')
-endfunction
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+command! FZFNeigh call s:fzf_neighbouring_files()
+
+let g:guttercleaned = 0
+
 
 " Do not use smart case in command line mode,
 " extracted from https://goo.gl/vCTYdK
@@ -658,51 +655,15 @@ if exists("+showtabline")
     highlight link TabNum Special
 endif
 
-" Tmuxline config
-"let g:tmuxline_status_justify = 'left'
-"let g:tmuxline_separators = {
-"    \ 'left' : '',
-"    \ 'left_alt': '>',
-"    \ 'right' : '',
-"    \ 'right_alt' : '<',
-"    \ 'space' : ' '}
-"
-"tmuxline#api#set_theme({
-"      \ 'a': ['237', '109', 'bold'],
-"      \ 'b': ['109', '236', ''],
-"      \ 'bg': ['240', '237', ''],
-"      \ 'c': ['240', '237', ''],
-"      \ 'cwin': ['109', '236', ''],
-"      \ 'win': ['240', '237', ''],
-"      \ 'x': ['240', '237', ''],
-"      \ 'y': ['109', '236', ''],
-"      \ 'z': ['237', '109', '']})
 let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#F#I', '#W'],
-      \'x'    : '',
-      \'y'    : '#(date)',
-      \'z'    : '#H',
-      \'options' : {'status-justify' : 'left'}}
-"let g:tmuxline_preset = {
-"      \'a'    : '#S',
-"      \'win'  : ['#I', '#W'],
-"      \'cwin' : ['#I', '#W', '#F'],
-"      \'y'    : ['%R', '%a', '%Y'],
-"      \'z'    : '#H'}
-"
-" Defaults
-"let g:tmuxline_preset = {
-"      \'a'    : '#S',
-"      \'b'    : '#W',
-"      \'c'    : '#H',
-"      \'win'  : '#I #W',
-"      \'cwin' : '#I #W',
-"      \'x'    : '%a',
-"      \'y'    : '#W %R',
-"      \'z'    : '#H'}
+  \ 'a'    : '#S',
+  \ 'c'    : ['#(whoami)', '#(uptime | cut -d " " -f 1,2,3)'],
+  \ 'win'  : ['#I', '#W'],
+  \ 'cwin' : ['#F#I', '#W'],
+  \ 'x'    : '',
+  \ 'y'    : '#(date)',
+  \ 'z'    : '#H',
+  \ 'options' : {'status-justify' : 'left'}}
 "
 " FZF Stuff
 let g:fzf_action = {
@@ -715,7 +676,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~40%' }
 
 let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
+  \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
@@ -732,13 +693,13 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 nnoremap <silent> <Leader>C :call fzf#run({
-\   'source':
-\     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
-\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
-\   'sink':    'colo',
-\   'options': '+m --reverse',
-\   'left':    30
-\ })<CR>
+  \   'source':
+  \     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+  \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
+  \   'sink':    'colo',
+  \   'options': '+m --reverse',
+  \   'left':    30
+  \ })<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -750,46 +711,10 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-function! s:fzf_neighbouring_files()
-  let current_file =expand("%")
-  let cwd = fnamemodify(current_file, ':p:h')
-  let command = 'rg --files --no-follow  ' . cwd . ''
-
-  call fzf#run({
-        \ 'source': command,
-        \ 'sink':   'e',
-        \ 'options': '-m -x +s',
-        \ 'window':  'enew' })
+" FullFilename function for lightline
+function! FullFilename()
+  return expand('%:p')
 endfunction
-
-function! s:fzf_statusline()
-  " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
-command! FZFNeigh call s:fzf_neighbouring_files()
-nnoremap <silent> <Leader>F :FZF<CR>
-nnoremap <silent> <Leader>Fb :Blines<CR>
-nnoremap <silent> <Leader>Fc :Commands<CR>
-nnoremap <silent> <Leader>Ff :Files<CR>
-nnoremap <silent> <Leader>FH :History<CR>
-nnoremap <silent> <Leader>Fh :History:<CR>
-nnoremap <silent> <Leader>FL :Lines<CR>
-nnoremap <silent> <Leader>Fn :FZFNeigh<CR>
-nnoremap <silent> <Leader>Fr :Rg<CR>
-
-let g:vim_markdown_conceal_code_blocks = 0
-let g:vim_markdown_conceal = 0
-
-nnoremap <silent> <Leader>gc :call GutterClean()<CR>
-nnoremap <silent> <Leader>gu :call Gutter()<CR>
-nnoremap <silent> <Leader>gt :call GutterToggle()<CR>
-
-let g:guttercleaned = 0
 
 function! GutterClean() abort
   let g:guttercleaned = 1
@@ -817,17 +742,6 @@ function GutterToggle() abort
   endif
 endfunction
 
-let hiddens_are_shown = 0
-function! ShowHidden() abort
-  set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
-  " Makes Trailing lightgrey
-  hi NonText term=reverse term=bold ctermfg=lightgrey
-  " Makes Leading spaces lightgrey
-  hi SpecialKey ctermfg=lightgrey
-  set list
-  let g:hiddens_are_shown = 1
-endfunction
-
 function! HideHidden() abort
   set nolist
   let g:hiddens_are_shown = 0
@@ -841,8 +755,37 @@ function! HiddenToggle() abort
     endif
 endfunction
 
+function! ShowHidden() abort
+  set listchars=eol:¬,tab:▶-,trail:~,extends:>,precedes:<
+  " Makes Trailing lightgrey
+  hi NonText term=reverse term=bold ctermfg=lightgrey
+  " Makes Leading spaces lightgrey
+  hi SpecialKey ctermfg=lightgrey
+  set list
+  let g:hiddens_are_shown = 1
+endfunction
+
+function! s:fzf_neighbouring_files()
+  let current_file =expand("%")
+  let cwd = fnamemodify(current_file, ':p:h')
+  let command = 'rg --files --no-follow  ' . cwd . ''
+
+  call fzf#run({
+         \ 'source': command,
+         \ 'sink':   'e',
+         \ 'options': '-m -x +s',
+         \ 'window':  'enew' })
+endfunction
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+
 function! YamlEdit() abort
     set cursorcolumn
     :colorscheme blue-mood
 endfunction
-
