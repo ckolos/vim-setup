@@ -9,7 +9,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " Look and Feel
 " Plug 'Gabirel/molokai'
-" Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'chriskempson/vim-tomorrow-theme'
 " Plug 'danilo-augusto/vim-afterglow'
   " Afterglow colorscheme settings
   " let g:afterglow_blackout=1
@@ -177,6 +177,28 @@ Plug 'ctrlpvim/ctrlp.vim'
   "    End the input string with a colon : followed by a command to execute it on the opening file(s): Use :25 to jump to line 25. Use :diffthis when opening multiple files to run :diffthis on the first 4 files.
 Plug 'easymotion/vim-easymotion'
   " https://github.com/easymotion/vim-easymotion
+  " Easymotion maps
+  "
+  map <Leader>l <Plug>(easymotion-lineforward)
+  map <Leader>j <Plug>(easymotion-j)
+  map <Leader>k <Plug>(easymotion-k)
+  map <Leader>h <Plug>(easymotion-linebackward)
+  
+  " s{char}{char} to move to {char}{char}
+  nmap <Leader>S <Plug>(easymotion-overwin-f2)
+  
+  " Move to line
+  map <Leader>L <Plug>(easymotion-bd-jk)
+  nmap <Leader>L <Plug>(easymotion-overwin-line)
+  
+  " Move to word
+  map  <Leader>w <Plug>(easymotion-bd-w)
+  nmap <Leader>w <Plug>(easymotion-overwin-w)
+  
+  " <Leader>f{char} to move to {char}
+  map  <Leader>f <Plug>(easymotion-bd-f)
+  nmap <Leader>f <Plug>(easymotion-overwin-f)
+  let g:EasyMotion_smartcase = 1
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -282,7 +304,7 @@ Plug 'junegunn/fzf.vim'
   let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
   let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
-  nnoremap <silent> <Leader>C :call fzf#run({
+  nnoremap <silent> <Leader>O :call fzf#run({
   \   'source':
   \     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
   \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
@@ -378,8 +400,8 @@ set t_ut=
 " turn on syntax highlighting
 syntax enable
 
-" Change leader to \
-let mapleader = ","
+" Change leader to
+let mapleader = ",,"
 
 " allow backspace to remove indent,eol, and start of doc
 set backspace=2
@@ -602,28 +624,6 @@ nnoremap <leader>v `[V`]
 nnoremap <C-H> :%s/
 xnoremap <C-H> :s/
 
-" Easymotion maps
-"
-map <Leader>l <Plug>(easymotion-lineforward)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-map <Leader>h <Plug>(easymotion-linebackward)
-
-" s{char}{char} to move to {char}{char}
-nmap <Leader>S <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-let g:EasyMotion_smartcase = 1
 
 " Decrease indent level in insert mode with shift+tab
 inoremap <S-Tab> <ESC><<i
