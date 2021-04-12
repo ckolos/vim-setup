@@ -27,7 +27,6 @@ Plug 'connorholyday/vim-snazzy'
 Plug 'icymind/NeoSolarized'
 Plug 'itchyny/landscape.vim'
 Plug 'jnurmine/zenburn'
-Plug 'joedicastro/vim-github256'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'rakr/vim-one'
@@ -291,12 +290,15 @@ set wrapscan
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
   set background=light
-  colorscheme github256
-  set rtp+=/usr/local/opt/fzf
+  set rtp+=/usr/local/bin/fzf
+  " TF Files in a different color
+  " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
+  autocmd BufEnter *.tf* colorscheme vim-github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 else
   set background=dark
+  autocmd BufEnter *.tf* colorscheme Tomorrow-Night
 endif
 
 " Some abbreviations
@@ -444,15 +446,15 @@ let g:ale_fixers = {
 set omnifunc=ale#completion#OmniFunc
 
 
-" TF Files in a different color
-" autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
-autocmd BufEnter *.tf* colorscheme Tomorrow-Night
 
 " Yaml files in a different color
 autocmd BufEnter *.yaml :call YamlEdit()
 autocmd BufEnter *.yml :call YamlEdit()
 
 " terraform fmt
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 let g:terraform_fmt_on_save=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
@@ -561,7 +563,7 @@ let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left':  [ [ 'mode' ],
-      \              ['paste', 'filename', 'gitbranch' ],
+      \              ['paste', 'fullfilename', 'gitbranch' ],
       \              [ ' ', 'line', 'column','percent' ],
       \            ],
       \   'right': [ [ 'fileformat', 'fileencoding', 'filetype'],
@@ -577,6 +579,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
       \   'fullfilename': 'FullFilename',
+      \   'filename': 'LightlineFilename',
       \ },
       \ 'mode_map': {
       \   'n' : 'NOR',
