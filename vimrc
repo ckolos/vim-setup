@@ -296,6 +296,7 @@ if strlen(system("/usr/bin/which sw_vers")) == 17
   autocmd BufEnter *.tf* colorscheme vim-github256
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+  let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 else
   set background=dark
   autocmd BufEnter *.tf* colorscheme Tomorrow-Night
@@ -454,7 +455,6 @@ autocmd BufEnter *.yml :call YamlEdit()
 " terraform fmt
 let g:terraform_align=1
 let g:terraform_fold_sections=1
-let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 let g:terraform_fmt_on_save=1
 
 " Highlight the 81st column of a line so we know when we go over 81 chars in a
