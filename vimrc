@@ -35,7 +35,9 @@ Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
 
 " Status line
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Syntax and file type
 Plug 'dense-analysis/ale'
@@ -427,8 +429,11 @@ let g:indentLine_enabled = 0
 let g:vim_json_syntax_conceal = 0
 
 " Set airline theme and font
-" let g:airline_theme="luna"
-" let g:airline_powerline_fonts = 1
+let g:airline_theme="onedark"
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_count = 1
 
 " w0pr/ale tweaks - https://github.com/w0rp/ale
 let g:ale_echo_msg_error_str = 'Err'
@@ -792,3 +797,4 @@ function! YamlEdit() abort
     set cursorcolumn
     :colorscheme blue-mood
 endfunction
+
