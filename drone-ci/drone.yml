@@ -5,7 +5,7 @@ name: vim-setup
 
 steps:
 - name: install vim
-  image: python:buster-slim:latest
+  image: python:slim-buster
   commands:
   - apt update
   - apt-get install -y vim
