@@ -15,5 +15,5 @@ test -f  "$VIMRC" && /bin/mv "${VIMRC}" "${VIMRC}.bak"
 test -f "$VIMDIR" && /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
 ln -s $HERE $HOME/.vim
 ln -s $HERE/vimrc $HOME/.vimrc
-mkdir $VIMDIR/autoload
+mkdir -p $VIMDIR/autoload
 curl -fLo ${VIMDIR}/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
