@@ -2,6 +2,8 @@
 kind: pipeline
 type: docker
 name: vim-setup
+workspace:
+  - /root
 
 steps:
 - name: test vim
