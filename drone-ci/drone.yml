@@ -10,7 +10,6 @@ steps:
   - apt update
   - apt-get install -y vim
 - name: test vim
-  image: python:buster-slim:latest
   commands:
   - bash -x vimsetup.sh
   - vim -s test_script.vim
