@@ -1,0 +1,15 @@
+---
+kind: pipeline
+type: docker
+name: vim-setup
+
+steps:
+- name: install vim
+  image: python:buster-slim:latest
+  commands:
+  - apt-get install -y vim
+- name: test vim
+  image: python:buster-slim:latest
+  commands:
+  - bash -x vimsetup.sh
+  - vim -s test_script.vim
