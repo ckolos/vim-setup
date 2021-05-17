@@ -15,6 +15,7 @@ test -f  "$VIMRC" && /bin/mv "${VIMRC}" "${VIMRC}.bak"
 test -f "$VIMDIR" && /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
 ln -s $HERE $HOME/.vim
 ln -s $HERE/vimrc $HOME/.vimrc
+ls -lrt $VIMDIR
 curl \
   --create-dirs \
   -fL \
