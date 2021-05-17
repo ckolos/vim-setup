@@ -7,6 +7,7 @@ steps:
 - name: install vim
   image: python:buster-slim:latest
   commands:
+  - apt update
   - apt-get install -y vim
 - name: test vim
   image: python:buster-slim:latest
