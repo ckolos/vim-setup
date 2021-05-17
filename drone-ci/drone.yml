@@ -8,6 +8,6 @@ steps:
   image: python:slim-buster
   commands:
   - apt update
-  - apt-get install -y vim
+  - apt-get install -y vim curl
   - bash -x vimsetup.sh
   - vim -s test_script.vim
