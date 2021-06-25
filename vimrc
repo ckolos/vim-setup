@@ -88,6 +88,7 @@ Plug 'easymotion/vim-easymotion'      " https://github.com/easymotion/vim-easymo
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
   ":Files [PATH] 	Files (runs $FZF_DEFAULT_COMMAND if defined)
   ":GFiles [OPTS] 	Git files (git ls-files)
