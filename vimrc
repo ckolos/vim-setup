@@ -116,7 +116,7 @@ Plug 'junegunn/fzf.vim'
   ":Filetypes 	File types
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
-Plug 'terryma/vim-multiple-cursors'      " https://github.com/terryma/vim-multiple-cursors
+Plug 'mg979/vim-visual-multi'      " https://github.com/mg979/vim-visual-multi
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
@@ -292,11 +292,11 @@ set wrapscan
 
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
-  set background=light
+  set background=dark
   set rtp+=/usr/local/bin/fzf
   " TF Files in a different color
   " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
-  autocmd BufEnter *.tf* colorscheme vim-github256
+  autocmd BufEnter *.tf* colorscheme onedark
   hi CursorLine  cterm=NONE ctermbg=darkgreen ctermfg=white guibg=darkred guifg=white
   let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
   let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
