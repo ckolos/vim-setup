@@ -293,6 +293,7 @@ set wrapscan
 " Check to see if we're using OSX by looking for sw_vers
 if strlen(system("/usr/bin/which sw_vers")) == 17
   set background=dark
+  " set background=light
   set rtp+=/usr/local/bin/fzf
   " TF Files in a different color
   " autocmd BufEnter *.tf* colorscheme Tomorrow-Night-Eighties
@@ -702,6 +703,15 @@ let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %
 let g:fzf_commands_expect = 'alt-enter,ctrl-x'
 
 nnoremap <silent> <Leader>C :call fzf#run({
+  \   'source':
+  \     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+  \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
+  \   'sink':    'colo',
+  \   'options': '+m --reverse',
+  \   'left':    30
+  \ })<CR>
+
+nnoremap <silent> <Leader>c :call fzf#run({
   \   'source':
   \     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
   \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
