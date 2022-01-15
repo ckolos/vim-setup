@@ -806,6 +806,7 @@ endfunction
 
 function! YamlEdit() abort
     set cursorcolumn
-    :colorscheme blue-mood
+    ":colorscheme blue-mood
+    :colorscheme oceanicnext
 endfunction
 
