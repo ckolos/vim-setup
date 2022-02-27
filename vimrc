@@ -22,7 +22,7 @@ Plug 'antlypls/vim-colors-codeschool'
 Plug 'arcticicestudio/nord-vim'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ckolos/blue-mood-vim'
-Plug 'ckolos/onedark.vim'
+Plug 'joshdick/onedark.vim'
 Plug 'connorholyday/vim-snazzy'
 Plug 'icymind/NeoSolarized'
 Plug 'itchyny/landscape.vim'
@@ -128,17 +128,6 @@ filetype on
 filetype plugin on
 
 " override the terminal colors and force 256 color mode
-if &term =~# 'rxvt-unicode-256color'
-  set t_Co=256
-  colorscheme wombat256mod
-else
-  set termguicolors " 24-bit terminal
-  let &t_8f = "[38;2;%lu;%lu;%lum"
-  let &t_8b = "[48;2;%lu;%lu;%lum"
-  "colorscheme monokai-phoenix
-  " colorscheme Iosvkem
-  colorscheme onedark
-endif
 
 " clearing uses the current background color
 set t_ut=
@@ -810,3 +799,13 @@ function! YamlEdit() abort
     :colorscheme oceanicnext
 endfunction
 
+
+if &term =~# 'rxvt-unicode-256color'
+  set t_Co=256
+  colorscheme wombat256mod
+else
+  set termguicolors " 24-bit terminal
+  let &t_8f = "[38;2;%lu;%lu;%lum"
+  let &t_8b = "[48;2;%lu;%lu;%lum"
+  colorscheme onedark
+endif
