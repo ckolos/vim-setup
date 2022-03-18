@@ -128,6 +128,20 @@ filetype on
 filetype plugin on
 
 " override the terminal colors and force 256 color mode
+if &term =~# 'rxvt-unicode-256color'
+  set t_Co=256
+  colorscheme wombat256mod
+  highlight Comment cterm=italic gui=italic
+else
+  set termguicolors " 24-bit terminal
+  let &t_8f = "[38;2;%lu;%lu;%lum"
+  let &t_8b = "[48;2;%lu;%lu;%lum"
+  colorscheme onedark  " monokai-phoenix and Ioskevm are also nice
+  highlight Comment cterm=italic gui=italic
+endif
+"
+" Use a persistent undofile
+set undodir=~/.vim/undodir
 
 " clearing uses the current background color
 set t_ut=
@@ -700,7 +714,7 @@ nnoremap <silent> <Leader>C :call fzf#run({
   \   'left':    30
   \ })<CR>
 
-nnoremap <silent> <Leader>c :call fzf#run({
+nnoremap <silent> <Leader>C :call fzf#run({
   \   'source':
   \     sort(map(split(globpath(&rtp, "colors/*.vim"), "\n"),
   \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')")),
