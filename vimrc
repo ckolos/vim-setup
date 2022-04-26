@@ -16,6 +16,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'pkukulak/idle'
   " Plug 'vim-scripts/ibmedit.vim'
   " Plug 'w0ng/vim-hybrid'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'SpaceVim/vim-material'
 Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
