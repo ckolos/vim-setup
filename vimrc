@@ -307,7 +307,8 @@ if strlen(system("/usr/bin/which sw_vers")) == 17
   let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 else
   set background=dark
-  autocmd BufEnter *.tf* colorscheme Tomorrow-Night
+  autocmd BufEnter,BufNewFile *.tf* colorscheme Tomorrow-Night
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 endif
 
 " Some abbreviations
