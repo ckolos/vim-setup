@@ -9,29 +9,29 @@ endif
 call plug#begin('~/.vim/plugged')
 "
 " Look and Feel
+  " Plug 'adrian5/oceanic-next-vim'
   " Plug 'Gabirel/molokai'
+  " Plug 'chriskempson/vim-tomorrow-theme'
   " Plug 'danilo-augusto/vim-afterglow'
   " Plug 'doums/darcula'
   " Plug 'john2x/flatui.vim'
+  " Plug 'icymind/NeoSolarized'
+  " Plug 'itchyny/landscape.vim'
   " Plug 'pkukulak/idle'
+  " Plug 'rakr/vim-one'
+  " Plug 'srcery-colors/srcery-vim'
   " Plug 'vim-scripts/ibmedit.vim'
   " Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'SpaceVim/vim-material'
-Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
 Plug 'arcticicestudio/nord-vim'
-Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'ckolos/blue-mood-vim'
-Plug 'joshdick/onedark.vim'
+Plug 'ckolos/onedark.vim'
 Plug 'connorholyday/vim-snazzy'
-Plug 'icymind/NeoSolarized'
-Plug 'itchyny/landscape.vim'
 Plug 'jnurmine/zenburn'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
-Plug 'rakr/vim-one'
-Plug 'srcery-colors/srcery-vim'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
 
@@ -51,7 +51,7 @@ Plug 'vim-scripts/gnupg.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
+  " Plug 'tpope/vim-rhubarb'
 
 " Misc
 Plug 'chrisbra/NrrwRgn'
@@ -65,6 +65,7 @@ Plug 'chrisbra/NrrwRgn'
   " :NRS - Enable Syncing the buffer content back (default on)
   " :NRN - Disable Syncing the buffer content back
   " :NRL - Reselect the last selected region and open it again in a narrowed window
+  "
 Plug 'ctrlpvim/ctrlp.vim'
   " Basic Usage
   " Run :CtrlP or :CtrlP [starting-directory] to invoke CtrlP in find file mode.
@@ -448,17 +449,17 @@ let g:ale_echo_msg_warning_str = 'Warn'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_error = 'E!'
 let g:ale_sign_warning = 'W.'
+
 let g:ale_linters = {
       \   'python': ['flake8', 'yapf'],
       \}
+
 let g:ale_fixers = {
       \   '*':      ['remove_trailing_lines', 'trim_whitespace'],
       \   'python': ['add_blank_lines_for_python_control_statements',
       \              'black', 'isort', 'trim_whitespace'],
       \}
 set omnifunc=ale#completion#OmniFunc
-
-
 
 " Yaml files in a different color
 autocmd BufEnter *.yaml :call YamlEdit()
@@ -549,6 +550,9 @@ nmap <silent> <Leader>h :call HiddenToggle()<CR>
 nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 " Open/close NERDTree Tabs with leader t
 nmap <silent> <Leader>t :Vexplore<CR>
+" Tabline movement
+nmap <silent> <Leader>N :tabn<CR>
+nmap <silent> <Leader>P :tabp<CR>
 
 " Make netrw look/act like NERDTree
 let g:netrw_dirhistmax = 0
@@ -583,7 +587,7 @@ let g:lightline = {
       \            ]
       \ },
       \ 'tab':  {
-      \   'active': [ 'tabnum', 'filename', 'modified' ],
+      \   'active':   [ 'tabnum', 'filename', 'modified' ],
       \   'inactive': [ 'tabnum', 'filename', 'modified' ]
       \ },
       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
