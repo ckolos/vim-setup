@@ -9,7 +9,6 @@ endif
 call plug#begin('~/.vim/plugged')
 "
 " Look and Feel
-  " Plug 'adrian5/oceanic-next-vim'
   " Plug 'Gabirel/molokai'
   " Plug 'chriskempson/vim-tomorrow-theme'
   " Plug 'danilo-augusto/vim-afterglow'
@@ -24,6 +23,7 @@ call plug#begin('~/.vim/plugged')
   " Plug 'w0ng/vim-hybrid'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'SpaceVim/vim-material'
+Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
 Plug 'arcticicestudio/nord-vim'
 Plug 'ckolos/blue-mood-vim'
@@ -38,7 +38,7 @@ Plug 'vim-scripts/wombat256.vim'
 " Status line
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 
 " Syntax and file type
 Plug 'dense-analysis/ale'
@@ -120,6 +120,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'mhinz/vim-startify'
 Plug 'mg979/vim-visual-multi'      " https://github.com/mg979/vim-visual-multi
 Plug 'Yggdroot/indentLine'
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 call plug#end()
 
 " used to trigger the FileType event
