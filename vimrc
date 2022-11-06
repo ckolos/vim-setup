@@ -34,6 +34,7 @@ Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
+Plug 'tomasiser/vim-code-dark'
 
 " Status line
 " Plug 'itchyny/lightline.vim'
@@ -740,6 +741,11 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
+
+command! -bang -complete=dir -nargs=? LS
+    \ call fzf#run(fzf#wrap({'source': 'ls', 'dir': <q-args>}, <bang>0))
+"
 " FullFilename function for lightline
 function! FullFilename()
   return expand('%:p')
@@ -830,3 +836,8 @@ else
   let &t_8b = "[48;2;%lu;%lu;%lum"
   colorscheme onedark
 endif
+
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
