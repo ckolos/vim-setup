@@ -1,24 +1,14 @@
 #!/usr/bin/env bash
-WHEREAMI="$PWD"
-CHECKOUTDIR="$(dirname "$0")"
 VIMDIR="$HOME/.vim"
 VIMRC="$HOME/.vimrc"
 
-if [[ "$CHECKOUTDIR" == "." ]]; then # Running inside checkoutdir
-  CHECKOUTDIR=${PWD}
-  else
-    if [[ ! "$CHECKOUTDIR" =~ $WHEREAMI ]]; then # running one level up from checkdir
-      CHECKOUTDIR="$PWD/$CHECKOUTDIR"
-    fi
-fi
+INSTALLDIR=$(dirname $(python -c 'import os, sys; print(f"{os.path.realpath(sys.argv[1])}")' $0))
+echo "CHECKOUTDIR = $INSTALLDIR"
 
-cd "$HOME" || exit 1
-test -f  "$VIMRC" && /bin/mv "${VIMRC}" "${VIMRC}.bak"
-test -f "$VIMDIR" && /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
-ln -s "$CHECKOUTDIR" "$VIMDIR"
-ln -s "$CHECKOUTDIR/vimrc" "$VIMRC"
-curl \
-  --create-dirs \
-  -fL \
-  -o "${VIMDIR}/autoload/plug.vim" \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+pushd $HOME
+test -f  "$VIMRC" && echo /bin/mv "${VIMRC}" "${VIMRC}.bak"
+test -f "$VIMDIR" && echo /bin/mv "${VIMDIR}" "${VIMDIR}.bak"
+ln -s $INSTALLDIR $VIMDIR
+ln -s $INSTALLDIR/vimrc $VIMRC
+popd
+
