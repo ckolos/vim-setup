@@ -131,6 +131,9 @@ filetype on
 " filetype indent on
 filetype plugin on
 
+" Indent based on filetype (if known)
+filetype indent on
+
 " override the terminal colors and force 256 color mode
 if &term =~# 'rxvt-unicode-256color'
   set t_Co=256
@@ -143,6 +146,11 @@ else
   colorscheme onedark  " monokai-phoenix and Ioskevm are also nice
   highlight Comment cterm=italic gui=italic
 endif
+
+" for vim 8
+ if (has("termguicolors"))
+  set termguicolors
+ endif
 "
 " Use a persistent undofile
 set undodir=~/.vim/undodir
@@ -154,7 +162,7 @@ set t_ut=
 syntax enable
 
 " Change leader to ,
-let mapleader = ","
+let mapleader = ','
 
 " allow backspace to remove indent,eol, and start of doc
 set backspace=2
@@ -185,7 +193,16 @@ set expandtab
 set fillchars=fold:\ ,vert:\|
 
 " The level we start to fold
-set foldlevel=0
+set foldlevel=3
+
+" Opem most folds by default
+set foldlevelstart=5
+
+" Set max nested folds
+set foldnestmax=10
+
+" Fold based on indent
+set foldmethod=indent
 
 " Use smartcase for searching
 set ignorecase smartcase
@@ -310,7 +327,7 @@ if strlen(system("/usr/bin/which sw_vers")) == 17
   let g:terraform_binary_path="$HOME/.asdf/shims/terraform"
 else
   set background=dark
-  autocmd BufEnter,BufNewFile *.tf* colorscheme Tomorrow-Night
+  autocmd BufEnter,BufNewFile *.tf* colorscheme torte
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 endif
 
@@ -337,6 +354,10 @@ noremap \p "+p
 " Use space to toggle folds
 nnoremap <Space> za
 vnoremap <Space> za
+
+" Move visual selection
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
 
 " (i)map - insertion mode maps
 imap <TAB> <C-N>
@@ -406,15 +427,16 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 " <Leader>f{char} to move to {char}
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" FZF Keymaps
 nnoremap <silent> <Leader>F :FZF<CR>
-nnoremap <silent> <Leader>Fb :Blines<CR>
-nnoremap <silent> <Leader>Fc :Commands<CR>
-nnoremap <silent> <Leader>Ff :Files<CR>
+nnoremap <silent> <Leader>FB :Blines<CR>
+nnoremap <silent> <Leader>FC :Commands<CR>
+nnoremap <silent> <Leader>FF :Files<CR>
 nnoremap <silent> <Leader>FH :History<CR>
-nnoremap <silent> <Leader>Fh :History:<CR>
 nnoremap <silent> <Leader>FL :Lines<CR>
-nnoremap <silent> <Leader>Fn :FZFNeigh<CR>
-nnoremap <silent> <Leader>Fr :Rg<CR>
+nnoremap <silent> <Leader>FN :FZFNeigh<CR>
+nnoremap <silent> <Leader>FR :Rg<CR>
 
 let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_conceal = 0
@@ -546,6 +568,8 @@ nmap <silent> <Leader>i :IndentLinesToggle<cr>
 nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Use leader-f to call :FZFNeigh
 nmap <silent> <Leader><C-f> :FZFNeigh<CR>
+" Use leader + C-g to call :GFiles
+nmap <silent> <Leader><C-g> :GFiles<CR>
 " Use leader-h to toggle hidden chars
 nmap <silent> <Leader>h :call HiddenToggle()<CR>
 " Poor-man's trailing white-space removal leader s
