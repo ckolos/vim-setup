@@ -25,16 +25,18 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'SpaceVim/vim-material'
 Plug 'adrian5/oceanic-next-vim'
 Plug 'antlypls/vim-colors-codeschool'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'ckolos/blue-mood-vim'
 Plug 'ckolos/onedark.vim'
 Plug 'connorholyday/vim-snazzy'
-Plug 'jnurmine/zenburn'
+" Plug 'jnurmine/zenburn'
 Plug 'neutaaaaan/iosvkem'
 Plug 'notpratheek/vim-luna'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'vim-scripts/wombat256.vim'
-Plug 'tomasiser/vim-code-dark'
+" Plug 'tomasiser/vim-code-dark'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " Status line
 " Plug 'itchyny/lightline.vim'
@@ -562,8 +564,6 @@ set wildignore+=*.orig " Merge resolution files
 "
 " Disable/Enable ALE with leader a
 " nmap <silent> <Leader>a :ALEToggle<CR>
-" Show cursorcolumn with leader c
-" nmap <silent> <Leader>c :set cursorcolumn!<CR>
 " Toggle GitGutter with leader g
 nmap <silent> <Leader>g :GitGutterToggle<CR>
 " Toggle IndentLines with leader i
@@ -581,8 +581,8 @@ nmap <silent> <Leader>s :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :no
 " Open/close NERDTree Tabs with leader t
 nmap <silent> <Leader>t :Vexplore<CR>
 " Tabline movement
-nmap <silent> <Leader>N :tabn<CR>
-nmap <silent> <Leader>P :tabp<CR>
+nmap <silent> <Leader>n :tabn<CR>
+nmap <silent> <Leader>n :tabp<CR>
 
 " Make netrw look/act like NERDTree
 let g:netrw_dirhistmax = 0
